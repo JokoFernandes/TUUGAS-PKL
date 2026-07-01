@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paket Modul Ajar Guru 2026/2027 — PAUD, SD, SMP, SMA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F4F1FF;
+    --bg-soft: #FBFAFF;
+    --deep: #221A45;
+    --violet: #6C3FD9;
+    --violet-deep: #4C27A8;
+    --blue: #3E6BFF;
+    --sky: #8FD3FF;
+    --gold: #FFC53D;
+    --gold-deep: #E89B0C;
+    --ink-soft: #5B5480;
+    --card-1: #E7DEFF;
+    --card-2: #D8E4FF;
+    --card-3: #FFE7B8;
+    --card-4: #DFF6EA;
+    --line: rgba(34,26,69,0.10);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--deep);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  p{margin:0;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  a{color:inherit;text-decoration:none;}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(244,241,255,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1180px;margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Baloo 2';font-weight:700;font-size:19px;color:var(--violet-deep);}
+  .brand-mark{
+    width:34px;height:34px;border-radius:10px;
+    background:linear-gradient(135deg,var(--violet),var(--blue));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(76,39,168,0.35);
+  }
+  .nav-cta{
+    background:var(--gold);
+    color:var(--deep);
+    font-weight:700;
+    padding:10px 20px;
+    border-radius:100px;
+    font-size:14px;
+    box-shadow:0 4px 0 var(--gold-deep);
+    transition:transform .15s ease;
+  }
+  .nav-cta:hover{transform:translateY(-2px);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:64px 0 40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-blob{
+    position:absolute; z-index:0; border-radius:50%;
+    filter:blur(60px); opacity:0.5;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:48px; align-items:center;
+    position:relative; z-index:1;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--white,#fff); background:#fff;
+    border:1px solid var(--line);
+    padding:7px 14px; border-radius:100px;
+    font-size:13px; font-weight:700; color:var(--violet-deep);
+    box-shadow:0 3px 10px rgba(76,39,168,0.08);
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);}
+  .hero h1{
+    font-size:clamp(32px,4.6vw,52px);
+    line-height:1.08;
+    color:var(--deep);
+    margin-top:18px;
+  }
+  .hero h1 .accent{
+    background:linear-gradient(90deg,var(--violet),var(--blue));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero-sub{
+    margin-top:18px; font-size:17px; line-height:1.6; color:var(--ink-soft);
+    max-width:480px;
+  }
+  .hero-actions{display:flex; align-items:center; gap:16px; margin-top:28px; flex-wrap:wrap;}
+  .btn-primary{
+    background:linear-gradient(90deg,var(--violet),var(--violet-deep));
+    color:#fff; font-weight:700; font-size:15.5px;
+    padding:16px 30px; border-radius:14px;
+    box-shadow:0 8px 0 var(--violet-deep), 0 14px 24px rgba(76,39,168,0.28);
+    transition:transform .15s ease, box-shadow .15s ease;
+    display:inline-block;
+  }
+  .btn-primary:hover{transform:translateY(-3px); box-shadow:0 11px 0 var(--violet-deep),0 18px 26px rgba(76,39,168,0.32);}
+  .btn-primary:active{transform:translateY(2px); box-shadow:0 4px 0 var(--violet-deep);}
+  .hero-price{display:flex;flex-direction:column; line-height:1.3;}
+  .hero-price .old{font-size:14px; color:#9890b8; text-decoration:line-through;}
+  .hero-price .new{font-size:22px; font-weight:800; font-family:'Baloo 2'; color:var(--deep);}
+  .trust-row{
+    display:flex; align-items:center; gap:22px; margin-top:34px; flex-wrap:wrap;
+  }
+  .trust-item{display:flex; align-items:center; gap:8px; font-size:13.5px; font-weight:600; color:var(--ink-soft);}
+  .trust-item svg{width:18px;height:18px; flex-shrink:0;}
+
+  /* hero stack illustration */
+  .stack-stage{
+    position:relative; height:440px;
+  }
+  .stack-card{
+    position:absolute; width:230px; height:300px;
+    border-radius:20px; padding:20px;
+    box-shadow:0 20px 40px rgba(34,26,69,0.18);
+    border:1px solid rgba(255,255,255,0.6);
+  }
+  .stack-card .tag{
+    font-size:11px; font-weight:800; letter-spacing:0.06em;
+    padding:5px 10px; border-radius:100px; display:inline-block;
+    background:rgba(255,255,255,0.65);
+  }
+  .stack-card .title{font-family:'Baloo 2'; font-weight:700; font-size:22px; margin-top:70px;}
+  .stack-card .lines{margin-top:18px; display:flex; flex-direction:column; gap:8px;}
+  .stack-card .lines span{display:block; height:7px; border-radius:6px; background:rgba(255,255,255,0.55);}
+  .stack-1{ background:linear-gradient(160deg,var(--card-1),#fff); top:70px; left:10px; transform:rotate(-9deg); z-index:1;}
+  .stack-2{ background:linear-gradient(160deg,var(--card-2),#fff); top:30px; left:90px; transform:rotate(4deg); z-index:2;}
+  .stack-3{ background:linear-gradient(160deg,var(--card-3),#fff); top:95px; left:170px; transform:rotate(13deg); z-index:1;}
+  .float-badge{
+    position:absolute; background:#fff; border-radius:16px; padding:12px 16px;
+    box-shadow:0 12px 26px rgba(34,26,69,0.16); display:flex; align-items:center; gap:10px;
+    font-weight:700; font-size:13.5px; z-index:3;
+  }
+  .badge-1{ top:10px; right:-10px; }
+  .badge-2{ bottom:20px; left:0px; }
+  .badge-ico{
+    width:34px;height:34px;border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+
+  @keyframes floaty{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
+  .float{animation:floaty 4.5s ease-in-out infinite;}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:76px 0;}
+  .section-head{max-width:640px; margin:0 auto 44px; text-align:center;}
+  .kicker{
+    font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--blue);
+  }
+  .section-head h2{font-size:clamp(26px,3.4vw,38px); margin-top:10px; color:var(--deep);}
+  .section-head p{margin-top:12px; color:var(--ink-soft); font-size:16px; line-height:1.6;}
+
+  /* ---------- ISI PAKET (12 items from source) ---------- */
+  .isi-band{ background:var(--deep); border-radius:32px; margin:0 24px; padding:56px 40px; color:#fff; position:relative; overflow:hidden;}
+  .isi-band::before{
+    content:""; position:absolute; width:380px; height:380px; border-radius:50%;
+    background:radial-gradient(circle,rgba(108,63,217,0.55),transparent 70%);
+    top:-160px; right:-120px;
+  }
+  .isi-band::after{
+    content:""; position:absolute; width:320px; height:320px; border-radius:50%;
+    background:radial-gradient(circle,rgba(62,107,255,0.4),transparent 70%);
+    bottom:-160px; left:-100px;
+  }
+  .isi-head{position:relative; z-index:1; max-width:600px;}
+  .isi-head .kicker{color:var(--sky);}
+  .isi-head h2{color:#fff; margin-top:10px; font-size:clamp(26px,3.2vw,34px);}
+  .isi-head p{color:#C9C3ED; margin-top:12px; font-size:15.5px; line-height:1.6;}
+  .jenjang-tabs{
+    position:relative; z-index:1;
+    display:flex; gap:10px; margin-top:30px; flex-wrap:wrap;
+  }
+  .jenjang-tab{
+    font-family:'Baloo 2'; font-weight:700; font-size:14.5px;
+    color:#C9C3ED; background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.16);
+    padding:10px 22px; border-radius:100px; cursor:pointer;
+    transition:all .2s ease;
+  }
+  .jenjang-tab:hover{background:rgba(255,255,255,0.14); color:#fff;}
+  .jenjang-tab.active{
+    background:linear-gradient(90deg,var(--violet),var(--blue));
+    color:#fff; border-color:transparent;
+    box-shadow:0 6px 16px rgba(76,39,168,0.4);
+  }
+  .isi-grid{
+    position:relative; z-index:1;
+    margin-top:24px;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
+  }
+  .isi-item{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:16px; padding:18px 18px;
+    display:flex; gap:14px; align-items:flex-start;
+    transition:background .2s ease, border-color .2s ease;
+  }
+  .isi-item:hover{background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.25);}
+  .isi-num{
+    font-family:'Baloo 2'; font-weight:700; font-size:13px;
+    width:30px;height:30px;border-radius:9px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg,var(--violet),var(--blue)); color:#fff;
+  }
+  .isi-text .t{font-weight:700; font-size:14.5px; line-height:1.35;}
+  .isi-text .s{font-size:12.5px; color:#B7B0DB; margin-top:3px;}
+
+  /* ---------- MANFAAT / BENEFITS ---------- */
+  .benefit-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+  }
+  .benefit-card{
+    background:var(--bg-soft); border:1px solid var(--line);
+    border-radius:20px; padding:26px 22px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .benefit-card:hover{transform:translateY(-6px); box-shadow:0 16px 30px rgba(34,26,69,0.10);}
+  .benefit-ico{
+    width:46px;height:46px;border-radius:13px;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:16px;
+  }
+  .benefit-card h3{font-size:17px; margin-bottom:8px;}
+  .benefit-card p{font-size:13.8px; color:var(--ink-soft); line-height:1.55;}
+
+  /* ---------- BONUS ---------- */
+  .bonus-wrap{
+    background:linear-gradient(135deg,#FFF7E6,#FFF1D6);
+    border:1.5px dashed var(--gold-deep);
+    border-radius:28px; padding:44px;
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:36px; align-items:center;
+  }
+  .bonus-badge{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--gold); color:var(--deep); font-weight:800; font-size:13px;
+    padding:8px 16px; border-radius:100px; margin-bottom:16px;
+  }
+  .bonus-wrap h2{font-size:clamp(24px,3vw,30px); color:var(--deep);}
+  .bonus-wrap > div:first-child p{margin-top:12px; color:var(--ink-soft); font-size:15px; line-height:1.6;}
+  .bonus-list{display:flex; flex-direction:column; gap:12px;}
+  .bonus-row{
+    background:#fff; border-radius:16px; padding:16px 18px;
+    display:flex; align-items:center; gap:14px;
+    box-shadow:0 8px 18px rgba(34,26,69,0.06);
+  }
+  .bonus-ico{
+    width:38px;height:38px; border-radius:11px; flex-shrink:0;
+    background:linear-gradient(135deg,var(--violet),var(--blue));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .bonus-row .t{font-weight:700; font-size:14.5px;}
+  .bonus-row .s{font-size:12.5px; color:var(--ink-soft); margin-top:2px;}
+  .bonus-row .val{
+    margin-left:auto; font-size:12px; font-weight:800; color:#9890b8; text-decoration:line-through; white-space:nowrap;
+  }
+
+  /* ---------- FOR WHO ---------- */
+  .who-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .who-card{
+    border-radius:20px; padding:26px; color:#fff; position:relative; overflow:hidden;
+  }
+  .who-card h3{font-size:18px; margin-bottom:10px;}
+  .who-card p{font-size:13.8px; line-height:1.55; opacity:0.9;}
+  .who-1{background:linear-gradient(160deg,var(--violet),var(--violet-deep));}
+  .who-2{background:linear-gradient(160deg,var(--blue),#2445C9);}
+  .who-3{background:linear-gradient(160deg,#5AB6E8,#2C82C9);}
+  .who-4{background:linear-gradient(160deg,#9B6FE8,#5A3FBF);}
+
+  /* ---------- TESTIMONI ---------- */
+  .testi-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .testi-card{
+    background:var(--bg-soft); border:1px solid var(--line); border-radius:20px; padding:24px;
+  }
+  .stars{color:var(--gold-deep); font-size:15px; letter-spacing:2px; margin-bottom:12px;}
+  .testi-card p.quote{font-size:14.5px; line-height:1.6; color:var(--deep);}
+  .testi-person{display:flex; align-items:center; gap:12px; margin-top:18px;}
+  .avatar{
+    width:38px;height:38px;border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-family:'Baloo 2'; font-weight:700; color:#fff; font-size:14px;
+  }
+  .testi-person .n{font-weight:700; font-size:13.5px;}
+  .testi-person .r{font-size:12px; color:var(--ink-soft);}
+
+  /* ---------- FAQ ---------- */
+  .faq{max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:12px;}
+  .faq-item{background:var(--bg-soft); border:1px solid var(--line); border-radius:16px; overflow:hidden;}
+  .faq-q{
+    padding:18px 22px; display:flex; align-items:center; justify-content:space-between;
+    cursor:pointer; font-weight:700; font-size:15px; gap:16px;
+  }
+  .faq-q .plus{font-family:'Baloo 2'; font-size:20px; color:var(--violet); transition:transform .2s ease; flex-shrink:0;}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .25s ease; }
+  .faq-item.open .faq-a{max-height:200px;}
+  .faq-a p{padding:0 22px 20px; font-size:14px; line-height:1.6; color:var(--ink-soft);}
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{
+    border-radius:32px; margin:0 24px; padding:60px 40px; text-align:center;
+    background:linear-gradient(135deg,var(--violet),var(--blue));
+    position:relative; overflow:hidden; color:#fff;
+  }
+  .final-cta::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.15), transparent 40%),
+               radial-gradient(circle at 80% 80%, rgba(255,255,255,0.12), transparent 40%);
+  }
+  .final-inner{position:relative; z-index:1; max-width:560px; margin:0 auto;}
+  .final-cta h2{font-size:clamp(26px,3.6vw,36px); color:#fff;}
+  .final-cta p{margin-top:14px; color:#E5E1FF; font-size:15.5px; line-height:1.6;}
+  .final-price{
+    margin-top:26px; display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap;
+  }
+  .final-price .old{font-size:16px; text-decoration:line-through; color:#C9C3ED;}
+  .final-price .new{font-family:'Baloo 2'; font-size:32px; font-weight:800; color:var(--gold);}
+  .btn-gold{
+    margin-top:22px; display:inline-block;
+    background:var(--gold); color:var(--deep); font-weight:800; font-size:16px;
+    padding:17px 34px; border-radius:14px;
+    box-shadow:0 8px 0 var(--gold-deep);
+    transition:transform .15s ease;
+  }
+  .btn-gold:hover{transform:translateY(-3px);}
+  .countdown{
+    margin-top:22px; display:inline-flex; gap:10px; background:rgba(0,0,0,0.18); padding:10px 16px; border-radius:100px;
+    font-size:13px; font-weight:700;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:48px 0 32px; text-align:center;}
+  footer .brand{justify-content:center; margin-bottom:10px;}
+  footer p{color:var(--ink-soft); font-size:13px; margin-top:6px;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .stack-stage{height:340px; max-width:420px; margin:0 auto;}
+    .isi-grid{grid-template-columns:repeat(2,1fr);}
+    .benefit-grid{grid-template-columns:repeat(2,1fr);}
+    .who-grid{grid-template-columns:repeat(2,1fr);}
+    .testi-grid{grid-template-columns:repeat(2,1fr);}
+    .bonus-wrap{grid-template-columns:1fr;}
+    .isi-band{padding:40px 22px;}
+  }
+  @media (max-width:560px){
+    .badge-1{ top:10px; right:-80px; }
+    .isi-grid{grid-template-columns:1fr;}
+    .benefit-grid{grid-template-columns:1fr;}
+    .who-grid{grid-template-columns:1fr;}
+    .testi-grid{grid-template-columns:1fr;}
+    section{padding:56px 0;}
+    .final-cta, .isi-band{margin:0 12px; border-radius:24px; padding:40px 22px;}
+  }
+  @media (max-width:425px){
+    .bonus-row{
+      display: flex;
+      flex-direction: column;
+      background:#fff; border-radius:16px; padding:16px 18px;
+      display:flex; align-items:center; gap:14px;
+      box-shadow:0 8px 18px rgba(34,26,69,0.06);
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <span class="brand-mark">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h11a5 5 0 0 1 5 5v11H9a5 5 0 0 1-5-5V4z" fill="white" opacity="0.95"/></svg>
+      </span>
+      Admin Guru
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-blob" style="width:420px;height:420px;background:var(--violet);top:-120px;left:-140px;"></div>
+  <div class="hero-blob" style="width:360px;height:360px;background:var(--sky);top:60px;right:-140px;"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> PAUD · SD · SMP · SMA — Tahun Ajaran 2026/2027</span>
+      <h1>Siap Mengajar <span class="accent">Lebih Mudah</span> &amp; Lebih Hebat</h1>
+      <p class="hero-sub">Satu paket lengkap administrasi &amp; modul ajar untuk guru semua jenjang — dari PAUD/TK, SD, SMP, sampai SMA. Dari KSP/KOSP sampai raport, semuanya sudah jadi. Tinggal pilih jenjangmu, edit, langsung pakai.</p>
+      <div class="hero-actions">
+        <a href="#1-1" class="btn-primary">Lihat Selengkap →</a>
+      </div>
+      <div class="trust-row">
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#6C3FD9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9.3" stroke="#6C3FD9" stroke-width="1.6"/></svg>
+          Sesuai Kurikulum Merdeka
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.3 6.7 19l1-5.8L3.5 9.1l5.9-.9L12 3z" fill="#FFC53D"/></svg>
+          4 Jenjang: PAUD, SD, SMP, SMA
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 12h16M12 4v16" stroke="#3E6BFF" stroke-width="2" stroke-linecap="round"/></svg>
+          Format Word — Mudah Diedit
+        </div>
+      </div>
+    </div>
+
+    <div class="stack-stage">
+      <div class="stack-card stack-1">
+        <span class="tag" style="color:var(--violet-deep);">KSP/KOSP · PROTA</span>
+        <div class="title" style="color:var(--violet-deep);">Kurikulum Satuan</div>
+        <div class="lines"><span style="width:70%"></span><span style="width:85%"></span><span style="width:55%"></span></div>
+      </div>
+      <div class="stack-card stack-2 float">
+        <span class="tag" style="color:#2445C9;">RPP/RPPM · ATP</span>
+        <div class="title" style="color:#2445C9;">Rencana Ajar</div>
+        <div class="lines"><span style="width:80%"></span><span style="width:60%"></span><span style="width:70%"></span></div>
+      </div>
+      <div class="stack-card stack-3">
+        <span class="tag" style="color:#B4790C;">MODUL AJAR</span>
+        <div class="title" style="color:#B4790C;">Semua<br>Jenjang</div>
+        <div class="lines"><span style="width:65%"></span><span style="width:90%"></span><span style="width:50%"></span></div>
+      </div>
+      <div class="float-badge badge-1 float">
+        <span class="badge-ico" style="background:#E7DEFF;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.2 6.8H21l-5.6 4.1L17.6 20 12 15.9 6.4 20l2.2-7.1L3 8.8h6.8L12 2z" fill="#6C3FD9"/></svg>
+        </span>
+        18 Pertemuan/Semester
+      </div>
+      <div class="float-badge badge-2">
+        <span class="badge-ico" style="background:#DFF6EA;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#1EA672" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        Siap Pakai, Tinggal Edit
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ISI PAKET -->
+<section id="isi">
+  <div class="wrap">
+    <div class="isi-band" id="1-1">
+      <div class="isi-head">
+        <span class="kicker">Isi Paket Lengkap</span>
+        <h2>12 Dokumen Administrasi Guru, Siap Untuk Jenjang Manapun</h2>
+        <p>Satu sistem, empat jenjang. Pilih jenjang tempatmu mengajar, dan lihat 12 dokumen yang kamu dapatkan.</p>
+      </div>
+
+      <div class="jenjang-tabs">
+        <button class="jenjang-tab active" data-jenjang="paud">PAUD / TK</button>
+        <button class="jenjang-tab" data-jenjang="sd">SD</button>
+        <button class="jenjang-tab" data-jenjang="smp">SMP</button>
+        <button class="jenjang-tab" data-jenjang="sma">SMA</button>
+      </div>
+
+      <div class="isi-grid" data-panel="paud">
+        <div class="isi-item"><span class="isi-num">01</span><div class="isi-text"><div class="t">KSP</div><div class="s">Kurikulum Satuan Pendidikan</div></div></div>
+        <div class="isi-item"><span class="isi-num">02</span><div class="isi-text"><div class="t">PROTA</div><div class="s">Program Tahunan</div></div></div>
+        <div class="isi-item"><span class="isi-num">03</span><div class="isi-text"><div class="t">Program Semester</div><div class="s">Prosem 1 &amp; 2</div></div></div>
+        <div class="isi-item"><span class="isi-num">04</span><div class="isi-text"><div class="t">RPPM</div><div class="s">Rencana Pelaksanaan Mingguan</div></div></div>
+        <div class="isi-item"><span class="isi-num">05</span><div class="isi-text"><div class="t">Modul Ajar TK A</div><div class="s">Semester 1 &amp; 2</div></div></div>
+        <div class="isi-item"><span class="isi-num">06</span><div class="isi-text"><div class="t">Modul Ajar TK B</div><div class="s">Semester 1 &amp; 2</div></div></div>
+        <div class="isi-item"><span class="isi-num">07</span><div class="isi-text"><div class="t">Kaldik 2025–2026</div><div class="s">Kalender Pendidikan</div></div></div>
+        <div class="isi-item"><span class="isi-num">08</span><div class="isi-text"><div class="t">Jadwal Kegiatan</div><div class="s">Harian &amp; Mingguan</div></div></div>
+        <div class="isi-item"><span class="isi-num">09</span><div class="isi-text"><div class="t">Supervisi Kurikulum</div><div class="s">Format Kurikulum Merdeka PAUD</div></div></div>
+        <div class="isi-item"><span class="isi-num">10</span><div class="isi-text"><div class="t">SOP</div><div class="s">Standar Operasional Prosedur</div></div></div>
+        <div class="isi-item"><span class="isi-num">11</span><div class="isi-text"><div class="t">Asesmen Awal</div><div class="s">Deteksi kemampuan anak</div></div></div>
+        <div class="isi-item"><span class="isi-num">12</span><div class="isi-text"><div class="t">Raport PAUD</div><div class="s">Kelompok A &amp; B, Semester 2</div></div></div>
+      </div>
+
+      <div class="isi-grid" data-panel="sd" style="display:none;">
+        <div class="isi-item"><span class="isi-num">01</span><div class="isi-text"><div class="t">KOSP</div><div class="s">Kurikulum Operasional Satuan Pendidikan</div></div></div>
+        <div class="isi-item"><span class="isi-num">02</span><div class="isi-text"><div class="t">PROTA</div><div class="s">Program Tahunan Kelas 1–6</div></div></div>
+        <div class="isi-item"><span class="isi-num">03</span><div class="isi-text"><div class="t">Program Semester</div><div class="s">Prosem 1 &amp; 2</div></div></div>
+        <div class="isi-item"><span class="isi-num">04</span><div class="isi-text"><div class="t">ATP</div><div class="s">Alur Tujuan Pembelajaran</div></div></div>
+        <div class="isi-item"><span class="isi-num">05</span><div class="isi-text"><div class="t">Modul Ajar Fase A–C</div><div class="s">Semester 1 &amp; 2</div></div></div>
+        <div class="isi-item"><span class="isi-num">06</span><div class="isi-text"><div class="t">Bank Soal &amp; LKPD</div><div class="s">Per mata pelajaran</div></div></div>
+        <div class="isi-item"><span class="isi-num">07</span><div class="isi-text"><div class="t">Kaldik 2025–2026</div><div class="s">Kalender Pendidikan</div></div></div>
+        <div class="isi-item"><span class="isi-num">08</span><div class="isi-text"><div class="t">Jadwal Pelajaran</div><div class="s">Harian &amp; Mingguan</div></div></div>
+        <div class="isi-item"><span class="isi-num">09</span><div class="isi-text"><div class="t">Supervisi Kurikulum</div><div class="s">Format Kurikulum Merdeka SD</div></div></div>
+        <div class="isi-item"><span class="isi-num">10</span><div class="isi-text"><div class="t">SOP</div><div class="s">Standar Operasional Prosedur</div></div></div>
+        <div class="isi-item"><span class="isi-num">11</span><div class="isi-text"><div class="t">Asesmen Diagnostik</div><div class="s">Awal tahun ajaran</div></div></div>
+        <div class="isi-item"><span class="isi-num">12</span><div class="isi-text"><div class="t">Raport Kurikulum Merdeka</div><div class="s">Semester 1 &amp; 2</div></div></div>
+      </div>
+
+      <div class="isi-grid" data-panel="smp" style="display:none;">
+        <div class="isi-item"><span class="isi-num">01</span><div class="isi-text"><div class="t">KOSP</div><div class="s">Kurikulum Operasional Satuan Pendidikan</div></div></div>
+        <div class="isi-item"><span class="isi-num">02</span><div class="isi-text"><div class="t">PROTA</div><div class="s">Program Tahunan Kelas 7–9</div></div></div>
+        <div class="isi-item"><span class="isi-num">03</span><div class="isi-text"><div class="t">Program Semester</div><div class="s">Prosem 1 &amp; 2</div></div></div>
+        <div class="isi-item"><span class="isi-num">04</span><div class="isi-text"><div class="t">ATP</div><div class="s">Alur Tujuan Pembelajaran</div></div></div>
+        <div class="isi-item"><span class="isi-num">05</span><div class="isi-text"><div class="t">Modul Ajar Fase D</div><div class="s">Semester 1 &amp; 2, per mapel</div></div></div>
+        <div class="isi-item"><span class="isi-num">06</span><div class="isi-text"><div class="t">Bank Soal &amp; LKPD</div><div class="s">Per mata pelajaran</div></div></div>
+        <div class="isi-item"><span class="isi-num">07</span><div class="isi-text"><div class="t">Kaldik 2025–2026</div><div class="s">Kalender Pendidikan</div></div></div>
+        <div class="isi-item"><span class="isi-num">08</span><div class="isi-text"><div class="t">Jadwal Pelajaran</div><div class="s">Harian &amp; Mingguan</div></div></div>
+        <div class="isi-item"><span class="isi-num">09</span><div class="isi-text"><div class="t">Supervisi Kurikulum</div><div class="s">Format Kurikulum Merdeka SMP</div></div></div>
+        <div class="isi-item"><span class="isi-num">10</span><div class="isi-text"><div class="t">SOP</div><div class="s">Standar Operasional Prosedur</div></div></div>
+        <div class="isi-item"><span class="isi-num">11</span><div class="isi-text"><div class="t">Asesmen Diagnostik</div><div class="s">Kognitif &amp; non-kognitif</div></div></div>
+        <div class="isi-item"><span class="isi-num">12</span><div class="isi-text"><div class="t">Raport &amp; P5</div><div class="s">Proyek Profil Pelajar Pancasila</div></div></div>
+      </div>
+
+      <div class="isi-grid" data-panel="sma" style="display:none;">
+        <div class="isi-item"><span class="isi-num">01</span><div class="isi-text"><div class="t">KOSP</div><div class="s">Kurikulum Operasional Satuan Pendidikan</div></div></div>
+        <div class="isi-item"><span class="isi-num">02</span><div class="isi-text"><div class="t">PROTA</div><div class="s">Program Tahunan Kelas 10–12</div></div></div>
+        <div class="isi-item"><span class="isi-num">03</span><div class="isi-text"><div class="t">Program Semester</div><div class="s">Prosem 1 &amp; 2</div></div></div>
+        <div class="isi-item"><span class="isi-num">04</span><div class="isi-text"><div class="t">ATP</div><div class="s">Alur Tujuan Pembelajaran</div></div></div>
+        <div class="isi-item"><span class="isi-num">05</span><div class="isi-text"><div class="t">Modul Ajar Fase E–F</div><div class="s">Semester 1 &amp; 2, per mapel</div></div></div>
+        <div class="isi-item"><span class="isi-num">06</span><div class="isi-text"><div class="t">Bank Soal &amp; LKPD</div><div class="s">Per mata pelajaran</div></div></div>
+        <div class="isi-item"><span class="isi-num">07</span><div class="isi-text"><div class="t">Kaldik 2025–2026</div><div class="s">Kalender Pendidikan</div></div></div>
+        <div class="isi-item"><span class="isi-num">08</span><div class="isi-text"><div class="t">Jadwal Pelajaran</div><div class="s">Harian &amp; Mingguan</div></div></div>
+        <div class="isi-item"><span class="isi-num">09</span><div class="isi-text"><div class="t">Supervisi Kurikulum</div><div class="s">Format Kurikulum Merdeka SMA</div></div></div>
+        <div class="isi-item"><span class="isi-num">10</span><div class="isi-text"><div class="t">SOP</div><div class="s">Standar Operasional Prosedur</div></div></div>
+        <div class="isi-item"><span class="isi-num">11</span><div class="isi-text"><div class="t">Asesmen Diagnostik &amp; Sumatif</div><div class="s">Awal tahun &amp; akhir semester</div></div></div>
+        <div class="isi-item"><span class="isi-num">12</span><div class="isi-text"><div class="t">Raport &amp; P5</div><div class="s">Proyek Profil Pelajar Pancasila</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANFAAT -->
+<section id="manfaat">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Kenapa Guru Pilih Paket Ini</span>
+      <h2>Fokus Mendidik, Bukan Pusing Administrasi</h2>
+      <p>Dibuat supaya waktumu lebih banyak untuk mengajar di kelas, bukan habis di depan laptop menyusun dokumen dari nol.</p>
+    </div>
+    <div class="benefit-grid">
+      <div class="benefit-card">
+        <span class="benefit-ico" style="background:#E7DEFF;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 8v4l3 2" stroke="#6C3FD9" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="#6C3FD9" stroke-width="2"/></svg>
+        </span>
+        <h3>Hemat Waktu</h3>
+        <p>Tak perlu menyusun dari nol. Semua dokumen sudah terstruktur, tinggal sesuaikan dengan sekolahmu.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-ico" style="background:#D8E4FF;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="#3E6BFF" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+        <h3>Format Word</h3>
+        <p>File .docx yang mudah diedit — ganti logo, nama sekolah, dan identitas kelas dalam hitungan menit.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-ico" style="background:#FFE7B8;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#B4790C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="#B4790C" stroke-width="2"/></svg>
+        </span>
+        <h3>Ikuti Kurikulum Merdeka</h3>
+        <p>Struktur dan format disusun mengikuti regulasi terbaru untuk tiap jenjang, jadi lebih aman dan sesuai standar.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-ico" style="background:#DFF6EA;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.6-9.3-9C1.1 8.4 3 5 6.5 5c2 0 3.4 1.2 4 2.4C11.1 6.2 12.5 5 14.5 5 18 5 19.9 8.4 18.3 12 16 16.4 12 21 12 21z" fill="#1EA672"/></svg>
+        </span>
+        <h3>Satu Sistem, Semua Jenjang</h3>
+        <p>Struktur dan format konsisten dari PAUD sampai SMA — cocok untuk sekolah dengan lebih dari satu jenjang.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BONUS -->
+<section id="bonus">
+  <div class="wrap">
+    <div class="bonus-wrap">
+      <div>
+        <span class="bonus-badge">🎁 Bonus Tambahan</span>
+        <h2>Beli Sekali, Dapat Lebih Banyak</h2>
+        <p>Selain 12 dokumen utama, kamu juga dapat perlengkapan pendukung ini secara gratis — supaya persiapan tahun ajaran barumu makin lengkap.</p>
+      </div>
+      <div class="bonus-list">
+        <div class="bonus-row">
+          <span class="bonus-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z" stroke="white" stroke-width="1.8"/><path d="M4 6l8 7 8-7" stroke="white" stroke-width="1.8"/></svg></span>
+          <div><div class="t">Format MPLS</div><div class="s">Panduan masa pengenalan lingkungan sekolah</div></div>
+          <span class="val">Rp35.000</span>
+        </div>
+        <div class="bonus-row">
+          <span class="bonus-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="white" stroke-width="1.8"/><path d="M8 9h8M8 13h5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          <div><div class="t">Template Cover Modul</div><div class="s">Desain sampul editable, tinggal ganti nama</div></div>
+          <span class="val">Rp25.000</span>
+        </div>
+        <div class="bonus-row">
+          <span class="bonus-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.3 6.7 19l1-5.8L3.5 9.1l5.9-.9L12 3z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <div><div class="t">Checklist Supervisi Kelas</div><div class="s">Lembar pantau kesiapan mengajar harian</div></div>
+          <span class="val">Rp20.000</span>
+        </div>
+        <div class="bonus-row">
+          <span class="bonus-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.2" stroke="white" stroke-width="1.7"/><path d="M5 20c1.2-3.6 4-5.4 7-5.4S18.8 16.4 20 20" stroke="white" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+          <div><div class="t">Update Gratis Selamanya</div><div class="s">Revisi mengikuti regulasi terbaru, tanpa biaya tambahan</div></div>
+          <span class="val">Gratis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section id="untuk-siapa">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Cocok Untuk</span>
+      <h2>Dibuat untuk Guru di Setiap Jenjang</h2>
+      <p>Isi paket menyesuaikan kebutuhan administrasi tiap jenjang, dari PAUD sampai SMA.</p>
+    </div>
+    <div class="who-grid">
+      <div class="who-card who-1">
+        <h3>Guru PAUD / TK</h3>
+        <p>Modul ajar siap pakai untuk 18 pertemuan tiap semester, tanpa menyusun ulang dari awal.</p>
+      </div>
+      <div class="who-card who-2">
+        <h3>Guru SD</h3>
+        <p>KOSP, ATP, dan modul ajar per fase yang sudah mengikuti struktur Kurikulum Merdeka.</p>
+      </div>
+      <div class="who-card who-3">
+        <h3>Guru SMP</h3>
+        <p>Modul ajar per mata pelajaran lengkap dengan asesmen diagnostik dan format P5.</p>
+      </div>
+      <div class="who-card who-4">
+        <h3>Guru SMA</h3>
+        <p>Perangkat ajar fase E–F, lengkap dengan raport dan proyek profil pelajar Pancasila.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONI -->
+<section id="testimoni">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Kata Mereka</span>
+      <h2>Dipercaya Guru dari Berbagai Jenjang</h2>
+      <p>Contoh gambaran pengalaman pengguna — sesuaikan dengan testimoni asli dari pelangganmu.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">Sangat membantu, tinggal edit nama sekolah dan langsung bisa dipakai mengajar besoknya.</p>
+        <div class="testi-person">
+          <span class="avatar" style="background:var(--violet);">SR</span>
+          <div><div class="n">Bu Sri R.</div><div class="r">Guru TK A, Bandung</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">Dokumen lengkap, dari KOSP sampai raport ada semua. Menghemat banyak waktu di awal tahun ajaran.</p>
+        <div class="testi-person">
+          <span class="avatar" style="background:var(--blue);">DA</span>
+          <div><div class="n">Bu Dian A.</div><div class="r">Guru Kelas 4 SD, Sidoarjo</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">Modul ajar per mapel sudah lengkap dengan ATP-nya. Sangat membantu saat pemeriksaan administrasi.</p>
+        <div class="testi-person">
+          <span class="avatar" style="background:#2C82C9;">NF</span>
+          <div><div class="n">Pak Nur F.</div><div class="r">Guru IPA SMP, Yogyakarta</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">Formatnya rapi dan mudah diedit di Word. Perangkat ajar fase E-nya sesuai dengan yang kami butuhkan.</p>
+        <div class="testi-person">
+          <span class="avatar" style="background:#5A3FBF;">RH</span>
+          <div><div class="n">Bu Rahma H.</div><div class="r">Guru Bahasa Indonesia SMA, Medan</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Pertanyaan Umum</span>
+      <h2>Masih Ada yang Ingin Ditanyakan?</h2>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-q">Apakah paket PAUD, SD, SMP, dan SMA berbeda isinya? <span class="plus">+</span></div>
+        <div class="faq-a"><p>Ya. Tiap jenjang punya 12 dokumen yang disesuaikan — misalnya SD/SMP/SMA memakai KOSP dan ATP, sedangkan PAUD memakai KSP dan RPPM. Pilih jenjang saat memesan.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Apakah filenya bisa langsung diedit? <span class="plus">+</span></div>
+        <div class="faq-a"><p>Bisa. Semua dokumen dalam format Word (.docx) sehingga kamu bebas mengubah nama sekolah, logo, dan detail lainnya.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Apakah sudah sesuai Kurikulum Merdeka? <span class="plus">+</span></div>
+        <div class="faq-a"><p>Ya, struktur dan format dokumen disusun mengikuti pedoman Kurikulum Merdeka terbaru untuk masing-masing jenjang.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Bagaimana cara menerima file setelah membeli? <span class="plus">+</span></div>
+        <div class="faq-a"><p>File dikirim dalam bentuk tautan unduhan digital yang bisa langsung diakses setelah pembayaran dikonfirmasi.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Apakah ada garansi jika file bermasalah? <span class="plus">+</span></div>
+        <div class="faq-a"><p>Ada. Jika ada kendala membuka atau mengedit file, tim kami siap membantu memperbaikinya.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="cta">
+  <div class="wrap">
+    <div class="final-cta">
+      <div class="final-inner">
+        <span class="eyebrow" style="background:rgba(255,255,255,0.15); color:#fff; border:none;">Promo Ajaran Baru 2026/2027</span>
+        <h2 style="margin-top:16px;">Siapkan Tahun Ajaran Barumu Sekarang</h2>
+        <p>Dapatkan 12 dokumen administrasi lengkap + bonus, hemat waktu berjam-jam menyusun dari nol.</p>
+        <div class="final-price">
+          <span class="old">Rp999.999.999</span>
+          <span class="new">Rp999.999.999</span>
+        </div>
+        <a href="" class="btn-gold">Dapatkan Paket Sekarang 🛒</a>
+        <div class="countdown">⏳ Harga promo terbatas untuk 100 pembeli pertama</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.jenjang-tab').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      const target = tab.getAttribute('data-jenjang');
+      document.querySelectorAll('.jenjang-tab').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.isi-grid').forEach(panel=>{
+        panel.style.display = (panel.getAttribute('data-panel') === target) ? 'grid' : 'none';
+      });
+    });
+  });
+
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.querySelector('.faq-q').addEventListener('click',()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>

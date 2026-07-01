@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AdminGuru — Paket Administrasi Guru Lengkap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#4F46E5;
+    --green-dark:#3730A3;
+    --green-pastel:#EEF2FF;
+    --blue:#0EA5E9;
+    --blue-dark:#0284C7;
+    --blue-pastel:#F0F9FF;
+    --yellow:#10B981;
+    --yellow-dark:rgb(1, 175, 93);
+    --ink:#0F172A;
+    --ink-soft:#475569;
+    --ink-faint:#94A3B8;
+    --bg:#FBFDFC;
+    --line:rgba(15,23,42,0.08);
+    --shadow-sm:0 2px 10px rgba(15,23,42,0.05);
+    --shadow-md:0 14px 34px -10px rgba(15,23,42,0.14);
+    --shadow-lg:0 26px 60px -14px rgba(15,23,42,0.20);
+    --radius-sm:14px;
+    --radius-md:20px;
+    --radius-lg:30px;
+    --font-display: 'Times New Roman', Times, sans-serif;
+    --font-body: 'Times New Roman', Times, serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--font-body);
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+
+  .container{ display: flex;flex-direction: column; width:100%; max-width:1140px; margin:0 auto; padding:0 24px; }
+
+  h1,h2,h3,h4{ font-family:var(--font-display); font-weight:800; letter-spacing:-0.02em; color:var(--ink); }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--font-display); font-weight:700; font-size:12.5px;
+    letter-spacing:0.06em; text-transform:uppercase;
+    padding:8px 16px; border-radius:100px;
+    color:var(--green-dark); background:var(--green-pastel);
+    border:1px solid rgba(34,197,94,0.18);
+  }
+
+  .section-head{ max-width:600px; margin:0 auto 46px; text-align:center; }
+  .section-head h2{ font-size:clamp(28px,3.6vw,38px); margin:16px 0 12px; line-height:1.15; }
+  .section-head p{ color:var(--ink-soft); font-size:16px; }
+
+  section{ padding:96px 0; position:relative; }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:9px;
+    font-family:var(--font-display); font-weight:700; font-size:15px;
+    padding:15px 28px; border-radius:100px;
+    transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--green) 0%,var(--green-dark) 100%);
+    color:#fff; box-shadow:0 10px 24px -6px rgba(34,197,94,0.45);
+  }
+  .btn-primary:hover{ transform:translateY(-3px); box-shadow:0 16px 32px -6px rgba(34,197,94,0.55); }
+  .btn-outline{ background:#fff; color:var(--ink); border:1.5px solid var(--line); }
+  .btn-outline:hover{ transform:translateY(-3px); border-color:var(--blue); color:var(--blue); box-shadow:var(--shadow-md); }
+  .btn-yellow{
+    background:linear-gradient(135deg,var(--yellow) 0%,var(--yellow-dark) 100%);
+    color:#7A3E00; font-size:17px; padding:18px 42px;
+    box-shadow:0 14px 30px -6px rgba(245,158,11,0.5);
+  }
+  .btn-yellow:hover{ transform:translateY(-3px) scale(1.02); box-shadow:0 18px 40px -6px rgba(245,158,11,0.6); }
+
+  /* ---------- Navbar ---------- */
+  header{ position:fixed; top:0; left:0; right:0; z-index:1000; padding:16px 0; transition:background .3s ease, box-shadow .3s ease, padding .3s ease; }
+  header.scrolled{
+    background:rgba(255,255,255,0.75); backdrop-filter:blur(16px) saturate(160%); -webkit-backdrop-filter:blur(16px) saturate(160%);
+    box-shadow:0 1px 0 var(--line), 0 8px 24px rgba(15,23,42,0.04); padding:12px 0;
+  }
+  nav{ display:flex; align-items:center; justify-content:space-between; }
+  .logo{ display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:800; font-size:19px; }
+  .logo-mark{
+    width:38px;height:38px;border-radius:11px;
+    background:linear-gradient(135deg,var(--green),var(--blue));
+    display:flex;align-items:center;justify-content:center; color:#fff; font-size:18px;
+    box-shadow:0 6px 16px -4px rgba(37,99,235,0.4);
+  }
+  .nav-links{ display:flex; align-items:center; gap:34px; font-weight:600; font-size:14.5px; color:var(--ink-soft); }
+  .nav-links a{ transition:color .2s ease; }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-cta{ display:flex; align-items:center; gap:14px; }
+  .nav-cta .btn{ padding:12px 24px; font-size:14.5px; }
+  .burger{ display:none; width:26px; height:20px; flex-direction:column; justify-content:space-between; }
+  .burger span{ height:2.5px; width:100%; background:var(--ink); border-radius:2px; }
+
+  /* ---------- Hero (Joey-style laptop) ---------- */
+  .hero{
+    padding:168px 0 80px;
+    background:
+      radial-gradient(60% 50% at 88% 8%, rgba(37,99,235,0.09), transparent 70%),
+      radial-gradient(50% 45% at 8% 18%, rgba(34,197,94,0.12), transparent 70%);
+    overflow:hidden;
+  }
+  .hero-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+  .hero-brand{
+    display:flex; align-items:center; gap:8px;
+    font-family:var(--font-display); font-weight:800; font-size:16px;
+    color:var(--ink); margin-bottom:22px;
+  }
+  .hero-brand sup{ font-size:11px; color:var(--green-dark); }
+  .hero-title{
+    font-family:var(--font-display); font-weight:800;
+    font-size:clamp(38px,5.2vw,62px); line-height:0.98; letter-spacing:-0.03em;
+    margin-bottom:30px;
+  }
+  .hero-title .hl{
+    background:linear-gradient(135deg,var(--green-dark),var(--blue));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero-checklist{ display:flex; flex-direction:column; gap:14px; margin-bottom:36px; }
+  .hero-checklist li{ display:flex; align-items:center; gap:12px; font-family:var(--font-display); font-weight:700; font-size:15px; }
+  .check-ic{
+    width:24px;height:24px;border-radius:50%; flex-shrink:0;
+    background:linear-gradient(135deg,var(--green),var(--green-dark)); color:#fff;
+    display:flex;align-items:center;justify-content:center; font-size:11px;
+    box-shadow:0 6px 14px -4px rgba(34,197,94,0.55);
+  }
+  .hero-actions{ display:flex; align-items:center; gap:22px; flex-wrap:wrap; margin-bottom:32px; }
+  .hero-actions .link-arrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--font-display); font-weight:700; font-size:14.5px; color:var(--ink-soft);
+    transition:gap .2s ease, color .2s ease;
+  }
+  .hero-actions .link-arrow:hover{ gap:12px; color:var(--blue); }
+  .hero-meta{ display:flex; align-items:center; gap:14px; }
+  .avatars{ display:flex; }
+  .avatars span{
+    width:32px;height:32px;border-radius:50%; border:2.5px solid #fff; margin-left:-10px;
+    background:linear-gradient(135deg,var(--blue-pastel),var(--green-pastel));
+    display:flex;align-items:center;justify-content:center; font-size:13px; font-weight:700; color:var(--blue-dark);
+    box-shadow:var(--shadow-sm);
+  }
+  .avatars span:first-child{ margin-left:0; }
+  .hero-meta small{ color:var(--ink-soft); font-size:13.5px; font-weight:600; white-space: normal;
+    overflow-wrap: break-word;}
+
+  .hero-visual{ position:relative; padding:16px 0 34px; }
+  @keyframes float{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-14px);} }
+  .laptop-mock{ position:relative; width:100%; max-width:580px; margin-left:auto; animation:float 7s ease-in-out infinite; filter:drop-shadow(0 40px 60px rgba(15,23,42,0.22)); }
+  .laptop-frame{ background:#0F172A; border-radius:20px 20px 7px 7px; padding:14px 14px 20px; }
+  .laptop-cam{ width:6px;height:6px;border-radius:50%; background:#334155; margin:0 auto 10px; }
+  .laptop-screen{
+    background:linear-gradient(160deg,var(--green-pastel) 0%, var(--blue-pastel) 100%);
+    border-radius:10px; padding:20px 22px; position:relative; min-height:290px; overflow:hidden;
+  }
+  .mini-nav{ display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+  .mini-logo{ font-family:var(--font-display); font-weight:800; font-size:13px; }
+  .mini-logo sup{ font-size:8px; color:var(--green-dark); }
+  .mini-links{ display:flex; align-items:center; gap:4px; background:#fff; border-radius:100px; padding:5px; box-shadow:var(--shadow-sm); }
+  .mini-links span{ font-size:9.5px; font-weight:700; color:var(--ink-soft); padding:6px 10px; border-radius:100px; }
+  .mini-links span.active{ background:var(--ink); color:#fff; display:flex; align-items:center; gap:4px; }
+  .mini-links span.active::before{ content:"●"; font-size:6px; color:var(--green); }
+  .mini-scroll{
+    position:absolute; top:58px; right:22px; background:rgba(255,255,255,0.7); backdrop-filter:blur(6px);
+    border-radius:100px; padding:8px 14px; font-size:9px; font-weight:700; letter-spacing:.05em; color:var(--ink-soft); text-transform:uppercase;
+  }
+  .mini-headline{ font-family:var(--font-display); font-weight:800; font-size:32px; line-height:0.92; letter-spacing:-0.02em; max-width:70%; margin-bottom:12px; }
+  .mini-headline .hl2{
+    background:linear-gradient(135deg,var(--green-dark),var(--blue));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .mini-sub{ font-size:9.5px; color:var(--ink-soft); max-width:55%; line-height:1.5; margin-bottom:32px; }
+  .mini-contact{ display:flex; flex-direction:column; gap:2px; }
+  .mini-contact strong{ font-family:var(--font-display); font-size:10.5px; }
+  .mini-contact span{ font-size:9px; color:var(--ink-faint); }
+  .mini-peek{ position:absolute; left:22px; right:22px; bottom:-22px; font-family:var(--font-display); font-weight:800; font-size:24px; opacity:0.9; }
+  .laptop-base{ height:14px; margin:0 -3px 0; background:linear-gradient(180deg,#E2E8F0,#94A3B8); border-radius:0 0 10px 10px; position:relative; }
+  .laptop-base::after{ content:""; position:absolute; left:50%; top:0; transform:translateX(-50%); width:70px; height:5px; background:#64748B; border-radius:0 0 8px 8px; }
+
+  .float-card{
+    position:absolute; background:rgba(255,255,255,0.8); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.6); border-radius:var(--radius-sm); box-shadow:var(--shadow-lg);
+    padding:13px 16px; display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:700; font-size:12.5px;
+  }
+  .fc1{ top:4px; left:-8px; animation:float 5s ease-in-out infinite; animation-delay:.3s; }
+  .fc2{ bottom:8px; left:-26px; animation:float 5.5s ease-in-out infinite; animation-delay:.6s; }
+  .fc-ic{ width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0; }
+
+  /* ---------- Trust / stats strip (Delta-style) ---------- */
+  .trust-strip{ background:var(--ink); padding:0; }
+  .trust-wrap{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:36px; padding:50px 0; }
+  .trust-copy{ max-width:280px; }
+  .trust-copy .eyebrow{ background:rgba(34,197,94,0.15); color:var(--green); border-color:rgba(34,197,94,0.3); margin-bottom:12px; }
+  .trust-copy p{ color:#94A3B8; font-size:14px; }
+  .trust-nums{ display:flex; gap:56px; flex-wrap:wrap; }
+  .trust-num strong{
+    display:block; font-family:var(--font-display); font-weight:800; font-size:clamp(26px,3vw,36px);
+    background:linear-gradient(135deg,#4ADE80,#60A5FA);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .trust-num span{ color:#94A3B8; font-size:12.5px; font-weight:600; }
+
+  /* ---------- Why section (feature grid, Delta "Built for the future") ---------- */
+  .why-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .why-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:32px 28px; transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .why-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); border-color:transparent; }
+  .why-ic{
+    width:48px;height:48px;border-radius:13px; display:flex;align-items:center;justify-content:center;
+    margin-bottom:20px; color:#fff; font-size:21px;
+  }
+  .why-card h4{ font-size:17px; margin-bottom:8px; }
+  .why-card p{ font-size:14.5px; color:var(--ink-soft); }
+
+  /* ---------- Isi Paket (product grid) ---------- */
+  .paket{ background:linear-gradient(180deg,#fff, var(--bg)); }
+  .paket-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius-md); overflow:hidden; }
+  .paket-item{ background:#fff; padding:28px 22px; transition:background .3s ease; }
+  .paket-item:hover{ background:var(--green-pastel); }
+  .paket-num{ font-family:var(--font-display); font-weight:800; font-size:12px; color:var(--ink-faint); letter-spacing:.05em; margin-bottom:12px; }
+  .paket-item h4{ font-size:15.5px; margin-bottom:5px; }
+  .paket-item p{ font-size:13px; color:var(--ink-soft); }
+
+  /* ---------- Jenjang pills ---------- */
+  .jenjang-row{ display:flex; gap:18px; flex-wrap:wrap; justify-content:center; }
+  .jenjang-pill{
+    display:flex; align-items:center; gap:14px;
+    background:#fff; border:1px solid var(--line); border-radius:100px;
+    padding:14px 26px 14px 14px; transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .jenjang-pill:hover{ transform:translateY(-4px); box-shadow:var(--shadow-md); border-color:transparent; }
+  .jenjang-pill .em{
+    width:44px;height:44px;border-radius:50%; display:flex;align-items:center;justify-content:center; font-size:20px; flex-shrink:0;
+  }
+  .jenjang-pill strong{ font-family:var(--font-display); font-size:15px; display:block; }
+  .jenjang-pill span{ font-size:12px; color:var(--ink-faint); }
+
+  /* ---------- CTA + preview (Delta "Ready to get started") ---------- */
+  .cta-ready{ text-align:center; }
+  .cta-ready h2{ font-size:clamp(28px,4vw,42px); max-width:640px; margin:0 auto 16px; }
+  .cta-ready p{ color:var(--ink-soft); max-width:480px; margin:0 auto 30px; }
+  .cta-links{ display:flex; align-items:center; justify-content:center; gap:26px; flex-wrap:wrap; margin-bottom:56px; }
+  .cta-links .link-arrow{ font-family:var(--font-display); font-weight:700; font-size:14.5px; color:var(--ink-soft); }
+  .cta-links .link-arrow:hover{ color:var(--blue); }
+
+  .preview-panel{
+    max-width:900px; margin:0 auto; background:#fff; border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-lg); border:1px solid var(--line); padding:20px; overflow:hidden;
+  }
+  .preview-bar{ display:flex; gap:6px; padding:4px 4px 16px; }
+  .preview-bar span{ width:10px;height:10px;border-radius:50%; background:#E2E8F0; }
+  .preview-docs{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .preview-doc{
+    aspect-ratio:3/4; border-radius:14px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    font-family:var(--font-display); font-weight:800; font-size:12.5px; color:#fff;
+  }
+  .preview-doc span.pd-ic{ font-size:26px; }
+
+  /* ---------- FAQ ---------- */
+  .faq-wrap{ max-width:760px; margin:0 auto; }
+  .faq-item{ border:1px solid var(--line); border-radius:16px; margin-bottom:14px; background:#fff; overflow:hidden; }
+  .faq-q{ display:flex; align-items:center; justify-content:space-between; gap:20px; padding:20px 24px; font-family:var(--font-display); font-weight:700; font-size:15px; }
+  .faq-q .plus{
+    width:28px;height:28px;border-radius:50%; background:var(--green-pastel); color:var(--green-dark);
+    display:flex;align-items:center;justify-content:center; flex-shrink:0; transition:transform .3s ease, background .3s ease; font-size:16px;
+  }
+  .faq-item.open .faq-q .plus{ transform:rotate(135deg); background:var(--green); color:#fff; }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .35s ease; }
+  .faq-a-inner{ padding:0 24px 22px; font-size:14.5px; color:var(--ink-soft); }
+
+  /* ---------- Footer ---------- */
+  footer{ padding:56px 0 30px; border-top:1px solid var(--line); }
+  .footer-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:30px; padding-bottom:30px; }
+  .footer-brand p{ color:var(--ink-soft); font-size:13.5px; max-width:270px; margin-top:12px; }
+  .footer-links{ display:flex; gap:56px; flex-wrap:wrap; }
+  .footer-col h5{ font-family:var(--font-display); font-size:13px; margin-bottom:14px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.04em; }
+  .footer-col a{ display:block; font-size:14px; color:var(--ink-soft); margin-bottom:10px; transition:color .2s ease; }
+  .footer-col a:hover{ color:var(--green-dark); }
+  .footer-bottom{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:13px; color:var(--ink-faint); border-top:1px solid var(--line); padding-top:22px; }
+
+  /* ---------- Reveal ---------- */
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  .primary-resp{
+    order: -1;
+  }
+  /* ---------- Responsive ---------- */
+  @media (max-width:1024px){
+    .why-grid{ grid-template-columns:repeat(2,1fr); }
+    .paket-grid{ grid-template-columns:repeat(3,1fr); }
+    .preview-docs{ grid-template-columns:repeat(3,1fr); }
+  }
+  @media (max-width:760px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-visual{ order:1; padding:0 0 26px; }
+    .link-arrow{display: none;}
+    .laptop-mock{ max-width:400px; margin:0 auto; }
+    .mini-headline{ font-size:22px; }
+    .mini-sub{ max-width:65%; }
+    .nav-links{ display:none; }
+    .burger{ display:flex; }
+    .nav-cta .btn-outline{ display:none; }
+    .hero{ padding:126px 0 50px; }
+    .hero-actions{ flex-direction:column; align-items:flex-start; }
+    .hero-actions .btn{ width:100%; }
+    section{ padding:64px 0; }
+    .trust-wrap{ flex-direction:column; align-items:flex-start; }
+    .trust-nums{ gap:32px; }
+    .why-grid{ grid-template-columns:1fr; }
+    .paket-grid{ grid-template-columns:repeat(2,1fr); }
+    .jenjang-row{ flex-direction:column; align-items:stretch; }
+    .preview-docs{ grid-template-columns:repeat(2,1fr); }
+    .footer-grid{ flex-direction:column; }
+    .link-arrow2{display: block !important;}
+  }
+  @media (max-width:424px){
+     .hero-actions .btn{ width:calc(100dvw - 45px) }
+     .hero-visual{
+      scale: 0.5;
+     }
+     .hero-title{
+        font-family:var(--font-display); font-weight:800;
+        font-size:clamp(35px,5.2vw,60px); line-height:0.98; letter-spacing:-0.03em;
+        margin-bottom:30px;
+      }
+      .hero-title .hl{
+        background:linear-gradient(135deg,var(--green-dark),var(--blue));
+        -webkit-background-clip:text; background-clip:text; color:transparent;
+      }
+      .trust-nums{
+        text-align: center;
+      }
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="container">
+    <nav>
+      <a href="#home" class="logo"><span class="logo-mark">📘</span>Admin<span style="color:var(--green-dark)">Guru</span></a>
+      <ul class="nav-links">
+        <li><a href="#kenapa">Kenapa Kami</a></li>
+        <li><a href="#isi-paket">Isi Paket</a></li>
+        <li><a href="#jenjang">Jenjang</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-copy reveal in">
+        <div class="hero-brand">📘 AdminGuru<sup>®</sup></div>
+        <h1 class="hero-title">Administrasi Guru<br><span class="hl">Satu Paket</span> Lengkap</h1>
+        <ul class="hero-checklist">
+          <li><span class="check-ic">✓</span> Semua Jenjang: TK, SD, SMP, SMA</li>
+          <li><span class="check-ic">✓</span> Format Word, Mudah Diedit</li>
+          <li><span class="check-ic">✓</span> Sesuai Kurikulum Merdeka Terbaru</li>
+          <li><span class="check-ic">✓</span> 12+ Dokumen Siap Pakai</li>
+        </ul>
+        <div class="hero-actions">
+          <a href="#kenapa" class="btn btn-primary primary-resp">Mulai Sekarang →</a>
+          <a href="#isi-paket" class="link-arrow">Lihat isi paket ↓</a>
+        </div>
+        <div class="hero-meta">
+          <div class="avatars"><span>RA</span><span>SN</span><span>DP</span><span>+</span></div>
+          <small style="max-width: 57dvw;">Dipercaya <strong>500+ guru</strong> di seluruh Indonesia</small>
+        </div>
+      </div>
+      <div class="hero-visual reveal in">
+        <div class="laptop-mock">
+          <div class="laptop-frame">
+            <div class="laptop-cam"></div>
+            <div class="laptop-screen">
+              <div class="mini-nav">
+                <span class="mini-logo">AdminGuru<sup>®</sup></span>
+                <div class="mini-links"><span>Home</span><span class="active">Isi Paket</span><span>Jenjang</span><span>Kontak</span></div>
+              </div>
+              <div class="mini-scroll">Scroll Down ↓</div>
+              <h3 class="mini-headline">Modul &<br><span class="hl2">Administrasi</span></h3>
+              <p class="mini-sub">Halo, saya guru — fokus pada modul ajar, asesmen, dan raport yang siap pakai untuk semua jenjang.</p>
+              <div class="mini-contact"><strong>Hubungi Kami</strong><span>halo@adminguru.id</span></div>
+              <div class="mini-peek">Isi Paket</div>
+            </div>
+          </div>
+          <div class="laptop-base"></div>
+        </div>
+        <div class="float-card fc1"><div class="fc-ic" style="background:var(--green);">📗</div> Modul Ajar TK</div>
+        <div class="float-card fc2"><div class="fc-ic" style="background:var(--blue);">📘</div> Modul Ajar SMP</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip" id="trust-wrap">
+  <div class="container">
+    <div class="trust-wrap reveal">
+      <div class="trust-copy">
+        <span class="eyebrow">Dipercaya Guru Se-Indonesia</span>
+        <p>Kami bangga digunakan oleh ribuan guru dari berbagai daerah setiap tahun ajaran baru.</p>
+      </div>
+      <div class="trust-nums">
+        <div class="trust-num"><strong>2.400+</strong><span>Guru pengguna</span></div>
+        <div class="trust-num"><strong>12</strong><span>Dokumen lengkap</span></div>
+        <div class="trust-num"><strong>4</strong><span>Jenjang pendidikan</span></div>
+        <div class="trust-num"><strong>4.9/5</strong><span>Rating kepuasan</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY / KENAPA -->
+<section id="kenapa">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Kenapa AdminGuru?</span>
+      <h2>Dibangun untuk Meringankan Kerja Guru</h2>
+      <p>Kami terus memperbarui paket ini agar selalu relevan dengan kebutuhan guru di kelas.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-ic" style="background:var(--green);">⚡</div>
+        <h4>Hemat Waktu</h4>
+        <p>Dokumen sudah tersusun rapi, tinggal disesuaikan seperlunya saja.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-ic" style="background:var(--blue);">🔄</div>
+        <h4>Update Berkala</h4>
+        <p>Menyesuaikan setiap perubahan regulasi dan kurikulum terbaru.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-ic" style="background:var(--yellow-dark);">💬</div>
+        <h4>Support 24 Jam</h4>
+        <p>Tim kami siap membantu jika ada pertanyaan atau kendala.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-ic" style="background:var(--green);">🔒</div>
+        <h4>Aman Digunakan</h4>
+        <p>Format file standar, tidak memerlukan aplikasi tambahan apapun.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-ic" style="background:var(--blue);">✏️</div>
+        <h4>Mudah Diedit</h4>
+        <p>Format Word yang fleksibel, bebas disesuaikan dengan data sekolah.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-ic" style="background:var(--yellow-dark);">🏆</div>
+        <h4>Kualitas Terjaga</h4>
+        <p>Disusun mengikuti standar administrasi guru yang berlaku.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ISI PAKET -->
+<section id="isi-paket" class="paket">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Isi Paket</span>
+      <h2>12 Dokumen dalam Satu Paket</h2>
+      <p>Semua perangkat administrasi guru, siap unduh dan siap edit.</p>
+    </div>
+    <div class="paket-grid reveal">
+      <div class="paket-item"><div class="paket-num">01</div><h4>KSP</h4><p>Kurikulum Satuan Pendidikan siap pakai.</p></div>
+      <div class="paket-item"><div class="paket-num">02</div><h4>PROTA</h4><p>Program tahunan tersusun rapi.</p></div>
+      <div class="paket-item"><div class="paket-num">03</div><h4>Program Semester</h4><p>Rincian kegiatan tiap semester.</p></div>
+      <div class="paket-item"><div class="paket-num">04</div><h4>RPPM</h4><p>Rencana pembelajaran mingguan.</p></div>
+      <div class="paket-item"><div class="paket-num">05</div><h4>Modul Ajar S1</h4><p>18 pertemuan semester ganjil.</p></div>
+      <div class="paket-item"><div class="paket-num">06</div><h4>Modul Ajar S2</h4><p>18 pertemuan semester genap.</p></div>
+      <div class="paket-item"><div class="paket-num">07</div><h4>Kalender Pendidikan</h4><p>Kaldik sesuai tahun ajaran.</p></div>
+      <div class="paket-item"><div class="paket-num">08</div><h4>Jadwal Harian & Mingguan</h4><p>Template jadwal siap edit.</p></div>
+      <div class="paket-item"><div class="paket-num">09</div><h4>Supervisi Kurikulum</h4><p>Instrumen supervisi kurikulum.</p></div>
+      <div class="paket-item"><div class="paket-num">10</div><h4>SOP</h4><p>Standar operasional prosedur.</p></div>
+      <div class="paket-item"><div class="paket-num">11</div><h4>Asesmen Awal</h4><p>Instrumen asesmen capaian anak.</p></div>
+      <div class="paket-item"><div class="paket-num">12</div><h4>Raport</h4><p>Template raport siap cetak.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- JENJANG -->
+<section id="jenjang">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Pilihan Jenjang</span>
+      <h2>Tersedia untuk Semua Jenjang</h2>
+      <p>Setiap paket disusun mengikuti karakteristik dan kurikulum tiap jenjang.</p>
+    </div>
+    <div class="jenjang-row reveal">
+      <a href="#cta-ready" class="jenjang-pill"><span class="em" style="background:var(--green-pastel);">🧸</span><span><strong>TK / PAUD</strong><span>Perangkat ajar PAUD</span></span></a>
+      <a href="#cta-ready" class="jenjang-pill"><span class="em" style="background:var(--blue-pastel);">🎒</span><span><strong>SD</strong><span>Kelas 1–6 lengkap</span></span></a>
+      <a href="#cta-ready" class="jenjang-pill"><span class="em" style="background:#FFF6E0;">📐</span><span><strong>SMP</strong><span>Per mata pelajaran</span></span></a>
+      <a href="#cta-ready" class="jenjang-pill"><span class="em" style="background:#F1E9FF;">🎓</span><span><strong>SMA</strong><span>Semua peminatan</span></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA + PREVIEW -->
+<section id="cta-ready">
+  <div class="container">
+    <div class="cta-ready reveal">
+      <span class="eyebrow">Siap Digunakan, Gratis Update</span>
+      <h2>Siap Mulai? Ajaran Baru Sudah di Depan Mata!</h2>
+      <p>Semua dokumen dalam format Word, tinggal disesuaikan dengan data sekolah Anda.</p>
+      <div class="cta-links">
+        <a href="#" class="btn btn-primary">Dapatkan Paket Sekarang</a>
+        <a href="#faq" class="link-arrow link-arrow2">Ada pertanyaan? Lihat FAQ →</a>
+      </div>
+      <div class="preview-panel">
+        <div class="preview-bar"><span></span><span></span><span></span></div>
+        <div class="preview-docs">
+          <div class="preview-doc" style="background:linear-gradient(135deg,var(--green),var(--green-dark));"><span class="pd-ic">📗</span>KSP</div>
+          <div class="preview-doc" style="background:linear-gradient(135deg,var(--blue),var(--blue-dark));"><span class="pd-ic">📘</span>RPPM</div>
+          <div class="preview-doc" style="background:linear-gradient(135deg,var(--yellow),var(--yellow-dark));"><span class="pd-ic">📙</span>PROSEM</div>
+          <div class="preview-doc" style="background:linear-gradient(135deg,#A78BFA,#7C3AED);"><span class="pd-ic">📕</span>PROTA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Punya Pertanyaan?</h2>
+      <p>Kami sudah siapkan jawabannya. Kalau masih ada yang kurang jelas, silakan hubungi kami.</p>
+    </div>
+    <div class="faq-wrap reveal">
+      <div class="faq-item">
+        <div class="faq-q"><span>Apakah file bisa diedit sesuai kebutuhan sekolah?</span><span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Bisa. Semua file dalam format Word (.docx) sehingga bebas diedit sesuai data sekolah, jadwal, dan peserta didik.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Untuk jenjang apa saja paket ini tersedia?</span><span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Tersedia untuk TK/PAUD, SD, SMP, dan SMA, masing-masing disusun mengikuti karakteristik jenjangnya.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Bagaimana cara menerima file setelah membeli?</span><span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Setelah pemesanan dikonfirmasi, seluruh file langsung dikirim dan bisa langsung diunduh.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Apakah sesuai Kurikulum Merdeka terbaru?</span><span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Ya, seluruh dokumen mengikuti regulasi dan Kurikulum Merdeka terbaru.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Apakah bisa dipakai untuk tahun ajaran berikutnya?</span><span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Bisa, file dapat digunakan berulang dan disesuaikan setiap tahun ajaran baru.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 20));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => { if(o !== item){ o.classList.remove('open'); o.querySelector('.faq-a').style.maxHeight = null; } });
+      if(isOpen){ item.classList.remove('open'); a.style.maxHeight = null; }
+      else { item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+    });
+  });
+
+  let menuOpen = false;
+  const navLinksEl = document.querySelector('.nav-links');
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => { menuOpen = false; navLinksEl.style.cssText = ''; }));
+</script>
+
+</body>
+</html>

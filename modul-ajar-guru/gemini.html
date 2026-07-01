@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paket Administrasi Guru Lengkap — Siap Pakai & Mudah Diedit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* New Professional Premium Color Palette */
+    --primary: #4F46E5;
+    --primary-dark: #3730A3;
+    --primary-light: #EEF2FF;
+    --accent: #0EA5E9;
+    --accent-dark: #0284C7;
+    --accent-light: #F0F9FF;
+    --success: #10B981;
+    --success-light: #ECFDF5;
+    
+    /* Neutral Shades */
+    --slate-900: #0F172A;
+    --slate-800: #1E293B;
+    --slate-700: #334155;
+    --slate-500: #64748B;
+    --slate-300: #CBD5E1;
+    --slate-100: #F1F5F9;
+    --bg-main: #F8FAFC;
+    --white: #FFFFFF;
+    
+    /* Utilities */
+    --shadow-sm: 0 1px 3px rgba(15,23,42,0.05);
+    --shadow-md: 0 10px 25px -5px rgba(79,70,229,0.1), 0 8px 10px -6px rgba(79,70,229,0.05);
+    --shadow-lg: 0 20px 40px -15px rgba(15,23,42,0.1);
+    
+    --radius-sm: 12px;
+    --radius-md: 18px;
+    --radius-lg: 24px;
+    
+    --font-display: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    color: var(--slate-700);
+    background: var(--bg-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    color: var(--slate-900);
+    letter-spacing: -0.02em;
+  }
+
+  /* Badge / Eyebrow */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    color: var(--primary);
+    background: var(--primary-light);
+    border: 1px solid rgba(79,70,229,0.15);
+    margin-bottom: 20px;
+  }
+
+  /* Section Header */
+  .section-head {
+    max-width: 680px;
+    margin: 0 auto 56px;
+    text-align: center;
+  }
+  .section-head h2 {
+    font-size: clamp(28px, 3.5vw, 38px);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: var(--slate-900);
+  }
+  .section-head p {
+    color: var(--slate-500);
+    font-size: 16px;
+  }
+
+  section { padding: 90px 0; position: relative; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    transition: all .25s ease;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: var(--white);
+    box-shadow: 0 8px 20px -4px rgba(79,70,229,0.35);
+  }
+  .btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -4px rgba(79,70,229,0.45);
+  }
+  .btn-accent {
+    background: var(--accent);
+    color: var(--white);
+    box-shadow: 0 8px 20px -4px rgba(2,132,199,0.3);
+  }
+  .btn-accent:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -4px rgba(2,132,199,0.4);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--slate-800);
+    border: 2px solid var(--slate-300);
+  }
+  .btn-outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-light);
+  }
+
+  /* ---------- Header/Navbar ---------- */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 20px 0;
+    transition: all 0.3s ease;
+  }
+  header.scrolled {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 1px 10px rgba(15,23,42,0.05);
+    padding: 14px 0;
+  }
+  nav { display: flex; align-items: center; justify-content: space-between; }
+  
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-display); font-weight: 800; font-size: 20px;
+    color: var(--slate-900);
+  }
+  .logo-mark {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white); font-size: 16px;
+  }
+  
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a {
+    font-weight: 600; font-size: 14.5px; color: var(--slate-500);
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover { color: var(--primary); }
+  
+  .burger {
+    display: none; width: 24px; height: 18px;
+    flex-direction: column; justify-content: space-between;
+    cursor: pointer;
+  }
+  .burger span { height: 2.5px; width: 100%; background: var(--slate-900); border-radius: 2px; transition: 0.3s; }
+
+  /* ---------- Hero Section ---------- */
+  .hero {
+    padding: 160px 0 80px;
+    background: radial-gradient(45% 45% at 85% 20%, rgba(14,165,233,0.06), transparent 100%),
+                radial-gradient(40% 40% at 15% 70%, rgba(79,70,229,0.07), transparent 100%);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+  
+  .hero-copy h1 {
+    font-size: clamp(34px, 4.5vw, 52px);
+    font-weight: 800; line-height: 1.15;
+    margin-bottom: 24px; color: var(--slate-900);
+  }
+  .hero-copy h1 span {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero-copy p { font-size: 17px; color: var(--slate-500); margin-bottom: 36px; max-width: 540px; }
+  .hero-actions { display: flex; gap: 16px; align-items: center; margin-bottom: 40px; }
+  
+  .hero-meta { display: flex; align-items: center; gap: 12px; }
+  .avatars { display: flex; }
+  .avatars span {
+    width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--white);
+    margin-left: -8px; background: var(--slate-300);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: var(--slate-900);
+  }
+  .avatars span:first-child { margin-left: 0; }
+  .hero-meta p { font-size: 13.5px; color: var(--slate-500); margin-bottom: 0; }
+  .hero-meta strong { color: var(--slate-900); font-weight: 700; }
+
+  .hero-visual { position: relative; display: flex; justify-content: center; }
+  .hero-box {
+    width: 100%; max-width: 420px; height: 320px;
+    background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+    border-radius: var(--radius-lg); position: relative;
+    border: 1px solid rgba(79,70,229,0.1);
+    box-shadow: var(--shadow-lg);
+  }
+  .float-card {
+    position: absolute; background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px); border: 1px solid var(--white);
+    border-radius: var(--radius-sm); box-shadow: var(--shadow-md);
+    padding: 12px 18px; display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-display); font-weight: 700; font-size: 13.5px;
+    color: var(--slate-900); animation: float 6s ease-in-out infinite;
+  }
+  .fc1 { top: 20px; left: -30px; animation-delay: 0s; }
+  .fc2 { top: 160px; right: -20px; animation-delay: 1.5s; }
+  .fc3 { bottom: 20px; left: -10px; animation-delay: 3s; }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* ---------- Trust Bar ---------- */
+  .trust-bar { background: var(--white); border-y: 1px solid var(--slate-100); padding: 24px 0; box-shadow: var(--shadow-sm); }
+  .trust-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+  .trust-item { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14.5px; color: var(--slate-800); }
+  .trust-item span { color: var(--success); font-weight: 700; }
+
+  /* ---------- Problem Section ---------- */
+  .problem { background: var(--white); }
+  .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .problem-card {
+    border: 1px solid var(--slate-100); background: var(--bg-main);
+    border-radius: var(--radius-md); padding: 32px 24px;
+    transition: all 0.3s ease;
+  }
+  .problem-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); background: var(--white); }
+  .problem-card .icon { font-size: 24px; margin-bottom: 16px; display: block; }
+  .problem-card h4 { font-size: 17px; font-weight: 700; margin-bottom: 10px; color: var(--slate-900); }
+  .problem-card p { font-size: 14px; color: var(--slate-500); }
+
+  /* ---------- Solution Section ---------- */
+  .solution-box {
+    background: var(--slate-900); color: var(--white);
+    border-radius: var(--radius-lg); padding: 64px;
+  }
+  .solution-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+  .solution-box h2 { color: var(--white); font-size: clamp(26px, 3.2vw, 36px); margin-bottom: 20px; }
+  .solution-box p { color: var(--slate-300); margin-bottom: 28px; }
+  
+  .check-list li { display: flex; gap: 12px; align-items: center; font-weight: 500; margin-bottom: 16px; color: var(--slate-100); }
+  .check-list .ck {
+    width: 20px; height: 20px; border-radius: 50%; background: var(--success);
+    display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;
+  }
+  
+  .comparison-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-md); padding: 32px;
+  }
+  .comp-row { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-radius: var(--radius-sm); margin-bottom: 12px; }
+  .comp-row.old { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); }
+  .comp-row.new { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); margin-bottom: 0; }
+  .comp-label { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .comp-time { font-family: var(--font-display); font-weight: 800; font-size: 20px; }
+  .comp-row.old .comp-time { color: #F87171; }
+  .comp-row.new .comp-time { color: #34D399; }
+  .comp-divider { text-align: center; color: var(--slate-500); font-size: 12px; font-weight: 700; margin: 16px 0; }
+
+  /* ---------- Package Content ---------- */
+  .package-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .pkg-card {
+    background: var(--white); border: 1px solid var(--slate-100);
+    border-radius: var(--radius-md); padding: 24px; transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+  }
+  .pkg-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--primary-light); }
+  .pkg-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .pkg-icon { font-size: 22px; }
+  .pkg-num { font-family: var(--font-display); font-weight: 700; font-size: 12px; color: var(--slate-300); }
+  .pkg-card h4 { font-size: 15.5px; font-weight: 700; margin-bottom: 6px; }
+  .pkg-card p { font-size: 13.5px; color: var(--slate-500); line-height: 1.5; }
+
+  /* ---------- Features / Advantages ---------- */
+  .adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .adv-card {
+    background: var(--white); padding: 32px 24px; border-radius: var(--radius-md);
+    border: 1px solid var(--slate-100);
+  }
+  .adv-icon {
+    width: 40px; height: 40px; border-radius: 10px; background: var(--primary-light);
+    color: var(--primary); display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700; margin-bottom: 20px;
+  }
+  .adv-card h4 { font-size: 17px; margin-bottom: 8px; }
+  .adv-card p { font-size: 14px; color: var(--slate-500); }
+
+  /* ---------- Grades / Jenjang ---------- */
+  .grade-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .grade-card {
+    background: var(--white); border: 1px solid var(--slate-100);
+    border-radius: var(--radius-md); padding: 32px 24px; text-align: center;
+    transition: all 0.3s ease; display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .grade-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+  .grade-badge { font-size: 32px; margin-bottom: 16px; display: block; }
+  .grade-card h3 { font-size: 19px; margin-bottom: 8px; }
+  .grade-card p { font-size: 13.5px; color: var(--slate-500); margin-bottom: 24px; flex-grow: 1; }
+  .grade-card .btn { width: 100%; padding: 10px 20px; font-size: 13.5px; }
+
+  /* ---------- Process Timeline ---------- */
+  .timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; position: relative; }
+  .timeline::before {
+    content: ""; position: absolute; top: 24px; left: 10%; right: 10%; height: 2px;
+    background: var(--slate-100); z-index: 1;
+  }
+  .step-card { text-align: center; position: relative; z-index: 2; }
+  .step-num {
+    width: 48px; height: 48px; border-radius: 50%; background: var(--white);
+    border: 2px solid var(--primary); color: var(--primary); font-family: var(--font-display);
+    font-weight: 800; font-size: 16px; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px; box-shadow: var(--shadow-sm); transition: 0.3s;
+  }
+  .step-card:hover .step-num { background: var(--primary); color: var(--white); }
+  .step-card h4 { font-size: 15px; margin-bottom: 6px; }
+  .step-card p { font-size: 13px; color: var(--slate-500); }
+
+  /* ---------- Testimonials ---------- */
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .testi-card {
+    background: var(--white); border: 1px solid var(--slate-100);
+    border-radius: var(--radius-md); padding: 32px 24px; box-shadow: var(--shadow-sm);
+  }
+  .stars { color: #F59E0B; font-size: 13px; margin-bottom: 12px; letter-spacing: 2px; }
+  .quote { font-size: 14.5px; color: var(--slate-600); margin-bottom: 24px; font-style: italic; }
+  .profile { display: flex; align-items: center; gap: 12px; }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 50%; background: var(--primary-light);
+    color: var(--primary); font-family: var(--font-display); font-weight: 700;
+    display: flex; align-items: center; justify-content: center; font-size: 13px;
+  }
+  .profile strong { font-size: 14px; color: var(--slate-900); display: block; }
+  .profile span { font-size: 12px; color: var(--slate-500); }
+
+  /* ---------- FAQ Accordion ---------- */
+  .faq-max { max-width: 760px; margin: 0 auto; }
+  .faq-item { background: var(--white); border: 1px solid var(--slate-100); border-radius: var(--radius-sm); margin-bottom: 12px; overflow: hidden; }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center; padding: 20px 24px;
+    font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--slate-900);
+    cursor: pointer; user-select: none;
+  }
+  .faq-toggle {
+    width: 24px; height: 24px; border-radius: 50%; background: var(--slate-100);
+    display: flex; align-items: center; justify-content: center; font-size: 14px; transition: 0.3s;
+  }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); background: var(--primary); color: var(--white); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-a-inner { padding: 0 24px 20px; font-size: 14px; color: var(--slate-500); border-top: 1px solid var(--slate-100); padding-top: 14px; }
+
+  /* ---------- Closing CTA ---------- */
+  .cta-final {
+    background: linear-gradient(135deg, var(--primary-dark), #1E1B4B);
+    border-radius: var(--radius-lg); padding: 72px 32px; text-align: center; color: var(--white);
+  }
+  .cta-final h2 { color: var(--white); font-size: clamp(26px, 4vw, 40px); max-width: 700px; margin: 0 auto 16px; font-weight: 800; }
+  .cta-final p { color: var(--slate-300); max-width: 500px; margin: 0 auto 32px; font-size: 16px; }
+  .cta-sub { margin-top: 16px; font-size: 12.5px; color: var(--slate-400); }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--white); padding: 56px 0 28px; border-top: 1px solid var(--slate-100); }
+  .footer-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--slate-100); }
+  .footer-brand p { font-size: 13.5px; color: var(--slate-500); max-width: 260px; margin-top: 12px; }
+  .footer-cols { display: flex; gap: 64px; }
+  .footer-col h5 { font-family: var(--font-display); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--slate-400); margin-bottom: 16px; }
+  .footer-col a { display: block; font-size: 13.5px; color: var(--slate-600); margin-bottom: 10px; }
+  .footer-col a:hover { color: var(--primary); }
+  .footer-bottom { display: flex; justify-content: space-between; font-size: 13px; color: var(--slate-400); padding-top: 24px; }
+
+  /* ---------- Scroll Animation Class ---------- */
+  .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* ---------- Responsive Breakpoints ---------- */
+  @media (max-width: 1024px) {
+    .problem-grid, .adv-grid { grid-template-columns: repeat(2, 1fr); }
+    .package-grid, .testi-grid { grid-template-columns: repeat(2, 1fr); }
+    .grade-grid { grid-template-columns: repeat(2, 1fr); }
+    .solution-grid { grid-template-columns: 1fr; gap: 36px; }
+  }
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .hero-copy p { margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .hero-meta { justify-content: center; }
+    .hero-visual { order: -1; margin-bottom: 24px; }
+    .burger { display: flex; }
+    .nav-links { display: none; }
+    
+    section { padding: 64px 0; }
+    .solution-box { padding: 36px 24px; }
+    .problem-grid, .package-grid, .adv-grid, .grade-grid, .testi-grid { grid-template-columns: 1fr; }
+    .timeline { grid-template-columns: 1fr; gap: 24px; }
+    .timeline::before { display: none; }
+    .footer-row { flex-direction: column; }
+    .footer-cols { gap: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="container">
+    <nav>
+      <a href="#home" class="logo">
+        <span class="logo-mark">📘</span>
+        Admin<span>Guru</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#isi-paket">Isi Paket</a></li>
+        <li><a href="#keunggulan">Keunggulan</a></li>
+        <li><a href="#jenjang">Pilihan Jenjang</a></li>
+        <li><a href="#testimoni">Testimoni</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="burger" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-copy reveal in">
+        <span class="badge">✦ Tahun Ajaran Baru 2026/2027</span>
+        <h1>Fokus Mengajar Terbaik, Biar Kami yang Siapkan <span>Administrasinya.</span></h1>
+        <p>Akses instan Modul Ajar, KSP, Prota, Prosem, perangkat asesmen, hingga format Raport siap pakai. Format Word, mudah diedit, dan sepenuhnya sesuai regulasi Kurikulum Merdeka terkini.</p>
+        <div class="hero-actions">
+          <a href="#jenjang" class="btn btn-primary">Pilih Jenjang Paket</a>
+          <a href="#isi-paket" class="btn btn-outline">Lihat Sampel Dokumen</a>
+        </div>
+        <div class="hero-meta">
+          <div class="avatars">
+            <span>RA</span><span>SN</span><span>DP</span><span>+</span>
+          </div>
+          <p>Dipercaya oleh <strong>500+ Guru & Kepala Sekolah</strong> di Indonesia</p>
+        </div>
+      </div>
+      <div class="hero-visual reveal in">
+        <div class="hero-box">
+          <div class="float-card fc1">📗 Perangkat TK/PAUD</div>
+          <div class="float-card fc2">📘 Modul Ajar SMP/SMA</div>
+          <div class="float-card fc3">📕 Dokumen Lengkap SD</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-row">
+      <div class="trust-item"><span>✓</span> 100% Siap Pakai</div>
+      <div class="trust-item"><span>✓</span> Format Microsoft Word (.docx)</div>
+      <div class="trust-item"><span>✓</span> Bebas Edit Kapan Saja</div>
+      <div class="trust-item"><span>✓</span> Sesuai Regulasi Kemendikbudristek</div>
+    </div>
+  </div>
+</div>
+
+<section class="problem">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="badge">Tantangan Profesi</span>
+      <h2>Waktu Anda Terlalu Berharga Hanya untuk Beban Administrasi</h2>
+      <p>Menyusun perangkat mengajar dari nol sering kali menyita energi yang seharusnya didekasikan untuk mendampingi tumbuh kembang anak didik.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <span class="icon">⏱️</span>
+        <h4>Modul Ajar Menyita Waktu</h4>
+        <p>Menyusun modul detail untuk setiap pertemuan mingguan menghabiskan waktu berjam-jam.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="icon">📅</span>
+        <h4>Beban Prota & Prosem</h4>
+        <p>Memetakan alokasi waktu tahunan dan semester secara manual sangat menguras fokus.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="icon">📝</span>
+        <h4>Asesmen yang Rumit</h4>
+        <p>Merancang instrumen evaluasi awal dan capaian belajar anak membutuhkan ketelitian ekstra.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="icon">📋</span>
+        <h4>Standardisasi SOP Sekolah</h4>
+        <p>Merancang berkas regulasi internal dan operasional agar lolos akreditasi sering kali membingungkan.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="icon">🧾</span>
+        <h4>Format Raport Berubah</h4>
+        <p>Penyesuaian deskripsi capaian belajar Kurikulum Merdeka membutuhkan narasi yang presisi.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="icon">🔄</span>
+        <h4>Regulasi Terus Diperbarui</h4>
+        <p>Perubahan kebijakan mendadak membuat dokumen lama Anda tidak lagi relevan atau usang.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="solution">
+  <div class="container">
+    <div class="solution-box reveal">
+      <div class="solution-grid">
+        <div>
+          <span class="badge" style="background:rgba(255,255,255,0.08); color:#FFF; border-color:transparent;">Solusi Praktis</span>
+          <h2>Buka, Sesuaikan Sedikit, Langsung Cetak</h2>
+          <p>Seluruh dokumen penting telah dikompilasi secara profesional. Anda hanya perlu melengkapi identitas sekolah, jadwal, dan nama peserta didik dalam hitungan menit.</p>
+          <ul class="check-list">
+            <li><div class="ck">✓</div> Buka file di Microsoft Word atau Google Docs</li>
+            <li><div class="ck">✓</div> Ubah nama sekolah dan data peserta didik</li>
+            <li><div class="ck">✓</div> Siap dicetak atau disimpan sebagai arsip digital resmi</li>
+          </ul>
+        </div>
+        <div class="comparison-card">
+          <div class="comp-row old">
+            <span class="comp-label">Cara Konvensional</span>
+            <span class="comp-time">± 20 Jam</span>
+          </div>
+          <div class="comp-divider">ALUR KERJA LEBIH EFISIEN</div>
+          <div class="comp-row new">
+            <span class="comp-label">Dengan AdminGuru</span>
+            <span class="comp-time">± 30 Menit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="isi-paket">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="badge">Kelengkapan Berkas</span>
+      <h2>12 Dokumen Esensial dalam 1 Paket Terintegrasi</h2>
+      <p>Dapatkan ekosistem administrasi mengajar terlengkap yang siap mempermudah tugas harian Anda.</p>
+    </div>
+    <div class="package-grid">
+      <div class="pkg-card reveal"><div class="pkg-header"><span class="pkg-icon">📄</span><span class="pkg-num">01</span></div><h4>KSP</h4><p>Kurikulum Satuan Pendidikan komprehensif acuan lembaga.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-header"><span class="pkg-icon">🗓️</span><span class="pkg-num">02</span></div><h4>PROTA</h4><p>Program Tahunan dengan pembagian alokasi waktu yang presisi.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-header"><span class="pkg-icon">📆</span><span class="pkg-num">03</span></div><h4>Program Semester</h4><p>Rencana target pembelajaran per komponen bab.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-header"><span class="pkg-icon">🧩</span><span class="pkg-num">04</span></div><h4>RPPM / Perangkat Mingguan</h4><p>Struktur kegiatan belajar terarah periode mingguan.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-header"><span class="pkg-icon">📘</span><span class="pkg-num">05</span></div><h4>Modul Ajar Ganjil</h4><p>Panduan mengajar lengkap 18 pertemuan Semester 1.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-header"><span class="pkg-icon">📙</span><span class="pkg-num">06</span></div><h4>Modul Ajar Genap</h4><p>Panduan mengajar lengkap 18 pertemuan Semester 2.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-header"><span class="pkg-icon">🗂️</span><span class="pkg-num">07</span></div><h4>Kalender Pendidikan</h4><p>Pemetaan agenda akademik resmi periode berjalan.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-header"><span class="pkg-icon">⏰</span><span class="pkg-num">08</span></div><h4>Jadwal Aktivitas</h4><p>Template pengaturan waktu harian yang fleksibel.</p></div>
+      <div class="pkg-card reveal"><div class="faq-q" style="padding:0;"><span class="pkg-icon">🔍</span><span class="pkg-num">09</span></div><h4>Instrumen Supervisi</h4><p>Lembar evaluasi kesiapan standar kurikulum.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-header"><span class="pkg-icon">📑</span><span class="pkg-num">10</span></div><h4>Berkas SOP</h4><p>Standar Operasional Prosedur baku kegiatan sekolah.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-header"><span class="pkg-icon">🧠</span><span class="pkg-num">11</span></div><h4>Asesmen Awal</h4><p>Format pemetaan minat dan potensi awal siswa.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-header"><span class="pkg-icon">🏆</span><span class="pkg-num">12</span></div><h4>Template Raport</h4><p>Format pelaporan hasil belajar yang rapi dan baku.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="keunggulan" style="background: var(--white);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="badge">Keunggulan Produk</span>
+      <h2>Investasi Terbaik untuk Produktivitas Anda</h2>
+      <p>Kami memastikan setiap lembar dokumen dirancang dengan standar kualitas tinggi, bukan sekadar salin-tempel acak.</p>
+    </div>
+    <div class="adv-grid">
+      <div class="adv-card reveal"><div class="adv-icon">⚡</div><h4>Efisiensi Maksimal</h4><p>Menghemat ratusan jam kerja sepanjang tahun ajaran.</p></div>
+      <div class="adv-card reveal"><div class="adv-icon">✏️</div><h4>Fleksibilitas Total</h4><p>Sepenuhnya berformat .docx yang ramah bagi pengguna awam.</p></div>
+      <div class="adv-card reveal"><div class="adv-icon">📚</div><h4>Akurasi Regulasi</h4><p>Disusun berdasarkan pedoman resmi Kurikulum Merdeka terkini.</p></div>
+      <div class="adv-card reveal"><div class="adv-icon">💬</div><h4>Layanan Pendampingan</h4><p>Tim support kami siap membantu jika Anda menemui kendala teknis.</p></div>
+      <div class="adv-card reveal"><div class="adv-icon">🔁</div><h4>Aset Berkelanjutan</h4><p>Cukup beli sekali, file bisa Anda adaptasi untuk tahun-tahun berikutnya.</p></div>
+      <div class="adv-card reveal"><div class="adv-icon">🖨️</div><h4>Siap Cetak</h4><p>Tata letak, margin, dan tipografi rapi berstandar dokumen dinas resmi.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="jenjang">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="badge">Kategori Paket</span>
+      <h2>Tersedia Sesuai Tingkat Satuan Pendidikan</h2>
+      <p>Pilih paket berkas yang dirancang khusus mengikuti karakteristik keilmuan tiap jenjang sekolah.</p>
+    </div>
+    <div class="grade-grid">
+      <div class="grade-card reveal">
+        <div>
+          <span class="grade-badge">🧸</span>
+          <h3>TK / PAUD</h3>
+          <p>Fokus pada aspek stimulasi tumbuh kembang anak, RPPM, modul ajar interaktif, dan raport perkembangan.</p>
+        </div>
+        <a href="#cta-final" class="btn btn-outline">Pilih Paket PAUD</a>
+      </div>
+      <div class="grade-card reveal">
+        <div>
+          <span class="grade-badge">🎒</span>
+          <h3>Sekolah Dasar (SD)</h3>
+          <p>Perangkat ajar tematik komprehensif untuk Kelas 1 hingga Kelas 6 lengkap.</p>
+        </div>
+        <a href="#cta-final" class="btn btn-outline">Pilih Paket SD</a>
+      </div>
+      <div class="grade-card reveal">
+        <div>
+          <span class="grade-badge">📐</span>
+          <h3>SMP</h3>
+          <p>Modul ajar terstruktur per mata pelajaran, lengkap dengan tujuan dan alur pembelajaran.</p>
+        </div>
+        <a href="#cta-final" class="btn btn-outline">Pilih Paket SMP</a>
+      </div>
+      <div class="grade-card reveal">
+        <div>
+          <span class="grade-badge">🎓</span>
+          <h3>SMA / SMK</h3>
+          <p>Perangkat administrasi tingkat lanjut yang disesuaikan dengan penjurusan dan peminatan.</p>
+        </div>
+        <a href="#cta-final" class="btn btn-outline">Pilih Paket SMA</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background: var(--white);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="badge">Langkah Mudah</span>
+      <h2>Proses Instan, Langsung Siap Pakai</h2>
+      <p>Tidak perlu sistem yang rumit. Mulai langkah efisiensi Anda hanya dalam hitungan menit.</p>
+    </div>
+    <div class="timeline">
+      <div class="step-card reveal"><div class="step-num">1</div><h4>Pilih Jenjang</h4><p>Sesuaikan dengan kebutuhan mengajar Anda.</p></div>
+      <div class="step-card reveal"><div class="step-num">2</div><h4>Konfirmasi</h4><p>Hubungi admin untuk proses transaksi cepat.</p></div>
+      <div class="step-card reveal"><div class="step-num">3</div><h4>Terima File</h4><p>Tautan unduh dokumen Word langsung dikirim ke Anda.</p></div>
+      <div class="step-card reveal"><div class="step-num">4</div><h4>Edit Ringan</h4><p>Sesuaikan nama sekolah dan nama peserta didik.</p></div>
+      <div class="step-card reveal"><div class="step-num">5</div><h4>Selesai</h4><p>Administrasi Anda tuntas dan siap digunakan.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="testimoni">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="badge">Testimoni Pengguna</span>
+      <h2>Pendapat Mereka yang Telah Terbantu</h2>
+      <p>Ratusan rekan pendidik di seluruh penjuru Indonesia telah beralih ke cara kerja yang lebih modern.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Sangat praktis. Cukup melengkapi data sekolah, urusan administrasi akreditasi beres. Waktu saya kini bisa fokus ke anak-anak didik."</p>
+        <div class="profile">
+          <div class="avatar">RA</div>
+          <div><strong>Ratna Ayu</strong><span>Guru TK, Bandung</span></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Format berkasnya sangat rapi. Pengisian narasi raport kelompok menjadi jauh lebih terstruktur dan hemat tenaga."</p>
+        <div class="profile">
+          <div class="avatar">SN</div>
+          <div><strong>Sri Nuraini</strong><span>Guru SD, Yogyakarta</span></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Modul ajarnya runut untuk 18 pertemuan penuh. Sangat direkomendasikan untuk guru baru maupun senior."</p>
+        <div class="profile">
+          <div class="avatar">DP</div>
+          <div><strong>Dian Permata</strong><span>Guru SMP, Surabaya</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background: var(--white);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="badge">Tanya Jawab</span>
+      <h2>Informasi Tambahan Seputar Produk</h2>
+      <p>Berikut adalah beberapa jawaban atas pertanyaan yang paling sering diajukan oleh rekan guru.</p>
+    </div>
+    <div class="faq-max reveal">
+      <div class="faq-item">
+        <div class="faq-q"><span>Apakah dokumen ini benar-benar bisa diedit penuh?</span><div class="faq-toggle">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Benar. Seluruh file dikirimkan dalam format asli Microsoft Word (.docx), sehingga Anda memiliki kendali penuh untuk menambah, menghapus, atau menyesuaikan konten.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Apakah isi paket sudah sesuai dengan Kurikulum Merdeka revisi terbaru?</span><div class="faq-toggle">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Ya, isi dokumen disesuaikan secara berkala mengikuti regulasi aturan capaian pembelajaran (CP) paling mutakhir dari kementerian terkait.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Bagaimana metode pengiriman file setelah pembayaran?</span><div class="faq-toggle">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Tautan akses unduh berkas (Google Drive resmi) akan dikirimkan langsung ke WhatsApp atau email Anda sesaat setelah konfirmasi pemesanan dilakukan.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Apakah file ini dapat digunakan kembali di tahun ajaran depan?</span><div class="faq-toggle">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Bisa. Anda cukup mengunduh sekali dan menyimpannya sebagai aset selamanya untuk dimodifikasi kembali di masa mendatang.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta-final" style="padding: 40px 0;">
+  <div class="container">
+    <div class="cta-final reveal">
+      <span class="badge" style="background:rgba(255,255,255,0.1); color:#fff; border-color:transparent;">Tahun Ajaran 2026/2027</span>
+      <h2>Persiapkan Tahun Ajaran Baru dengan Lebih Tenang</h2>
+      <p>Satu paket investasi administrasi terpadu untuk efisiensi kerja profesi Anda. Amankan kuota pemesanan paket Anda sekarang juga.</p>
+      <a href="https://api.whatsapp.com/send/?phone=6288210352982&text=Halo+Saya+inigin+memesan+Modul+ajar+Anda&app_absent=0" class="btn btn-accent">Hubungi Admin Via WhatsApp</a>
+      <div class="cta-sub">Proses instan • File Dokumen Abadi • Layanan Support Aktif</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <div class="footer-brand">
+        <a href="#home" class="logo">
+          <span class="logo-mark">📘</span> AdminGuru
+        </a>
+        <p>Solusi digital manajemen perangkat pembelajaran Guru Indonesia ramah pakai dan profesional.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Tautan</h5>
+          <a href="#isi-paket">Isi Paket</a>
+          <a href="#keunggulan">Keunggulan</a>
+          <a href="#jenjang">Pilihan Jenjang</a>
+        </div>
+        <div class="footer-col">
+          <h5>Bantuan</h5>
+          <a href="#faq">FAQ</a>
+          <a href="#testimoni">Testimoni</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 AdminGuru. Hak Cipta Dilindungi Undang-Undang.</span>
+      <span>Dibuat demi kemajuan pendidikan Indonesia.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Header scroll appearance adjustments
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Smooth Reveal element loader 
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // FAQ interactive toggles
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => {
+        if(o !== item){
+          o.classList.remove('open');
+          o.querySelector('.faq-a').style.maxHeight = null;
+        }
+      });
+      if(isOpen){
+        item.classList.remove('open');
+        a.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // Mobile navigation fallback setup
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.querySelector('.nav-links');
+  menuToggle.addEventListener('click', () => {
+    if(navLinks.style.display === 'flex') {
+      navLinks.style.display = 'none';
+    } else {
+      navLinks.style.display = 'flex';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '100%';
+      navLinks.style.left = '0';
+      navLinks.style.right = '0';
+      navLinks.style.background = '#fff';
+      navLinks.style.padding = '20px';
+      navLinks.style.boxShadow = '0 10px 15px rgba(0,0,0,0.05)';
+    }
+  });
+</script>
+
+</body>
+</html>
