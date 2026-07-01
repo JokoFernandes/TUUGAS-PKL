@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paket Administrasi Guru Lengkap — Siap Pakai, Mudah Diedit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#22C55E;
+    --green-dark:#16A34A;
+    --green-pastel:#EAFBF1;
+    --blue:#2563EB;
+    --blue-dark:#1D4ED8;
+    --blue-pastel:#EEF3FF;
+    --yellow:#FBBF24;
+    --yellow-dark:#F59E0B;
+    --ink:#0F172A;
+    --ink-soft:#475569;
+    --ink-faint:#94A3B8;
+    --white:#FFFFFF;
+    --bg:#FBFDFC;
+    --line:rgba(15,23,42,0.08);
+    --shadow-sm:0 2px 10px rgba(15,23,42,0.05);
+    --shadow-md:0 12px 32px -8px rgba(15,23,42,0.12);
+    --shadow-lg:0 24px 60px -12px rgba(15,23,42,0.18);
+    --radius-sm:14px;
+    --radius-md:20px;
+    --radius-lg:28px;
+    --font-display:'Plus Jakarta Sans', sans-serif;
+    --font-body:'Inter', sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--font-body);
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+
+  .container{
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  h1,h2,h3,h4{
+    font-family:var(--font-display);
+    font-weight:800;
+    letter-spacing:-0.02em;
+    color:var(--ink);
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    padding:8px 16px;
+    border-radius:100px;
+    color:var(--green-dark);
+    background:var(--green-pastel);
+    border:1px solid rgba(34,197,94,0.18);
+  }
+
+  .section-head{
+    max-width:640px;
+    margin:0 auto 52px;
+    text-align:center;
+  }
+  .section-head h2{
+    font-size:clamp(28px,4vw,40px);
+    margin:16px 0 14px;
+    line-height:1.15;
+  }
+  .section-head p{
+    color:var(--ink-soft);
+    font-size:16.5px;
+  }
+
+  section{ padding:100px 0; position:relative; }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:15.5px;
+    padding:16px 30px;
+    border-radius:100px;
+    transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, background .25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--green) 0%,var(--green-dark) 100%);
+    color:#fff;
+    box-shadow:0 10px 24px -6px rgba(34,197,94,0.45);
+  }
+  .btn-primary:hover{ transform:translateY(-3px); box-shadow:0 16px 32px -6px rgba(34,197,94,0.55);}
+  .btn-outline{
+    background:#fff;
+    color:var(--ink);
+    border:1.5px solid var(--line);
+  }
+  .btn-outline:hover{ transform:translateY(-3px); border-color:var(--blue); color:var(--blue); box-shadow:var(--shadow-md);}
+  .btn-yellow{
+    background:linear-gradient(135deg,var(--yellow) 0%,var(--yellow-dark) 100%);
+    color:#7A3E00;
+    font-size:18px;
+    padding:19px 44px;
+    box-shadow:0 14px 30px -6px rgba(245,158,11,0.5);
+  }
+  .btn-yellow:hover{ transform:translateY(-3px) scale(1.02); box-shadow:0 18px 40px -6px rgba(245,158,11,0.6);}
+  .btn-block-icon{ width:20px;height:20px; }
+
+  /* ---------- Navbar ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    padding:16px 0;
+    transition:background .3s ease, box-shadow .3s ease, padding .3s ease;
+  }
+  header.scrolled{
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(16px) saturate(160%);
+    -webkit-backdrop-filter:blur(16px) saturate(160%);
+    box-shadow:0 1px 0 var(--line), 0 8px 24px rgba(15,23,42,0.04);
+    padding:12px 0;
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-family:var(--font-display); font-weight:800; font-size:19px;
+  }
+  .logo-mark{
+    width:38px;height:38px;border-radius:11px;
+    background:linear-gradient(135deg,var(--green),var(--blue));
+    display:flex;align-items:center;justify-content:center;
+    color:#fff; font-size:18px;
+    box-shadow:0 6px 16px -4px rgba(37,99,235,0.4);
+  }
+  .nav-links{
+    display:flex; align-items:center; gap:36px;
+    font-weight:600; font-size:14.5px; color:var(--ink-soft);
+  }
+  .nav-links a{ transition:color .2s ease; position:relative; }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-cta{ display:flex; align-items:center; gap:14px; }
+  .nav-cta .btn{ padding:12px 24px; font-size:14.5px; }
+  .burger{ display:none; width:26px; height:20px; flex-direction:column; justify-content:space-between; }
+  .burger span{ height:2.5px; width:100%; background:var(--ink); border-radius:2px; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:170px 0 90px;
+    position:relative;
+    background:
+      radial-gradient(60% 50% at 88% 8%, rgba(37,99,235,0.09), transparent 70%),
+      radial-gradient(50% 45% at 8% 18%, rgba(34,197,94,0.12), transparent 70%);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.02fr 0.98fr; gap:60px; align-items:center;
+  }
+  .hero-copy .eyebrow{ margin-bottom:22px; }
+  .hero-copy h1{
+    font-size:clamp(34px,4.6vw,54px);
+    line-height:1.08;
+    margin-bottom:20px;
+  }
+  .hero-copy h1 .hl{
+    background:linear-gradient(135deg,var(--green-dark),var(--blue));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero-copy p{
+    font-size:17.5px; color:var(--ink-soft); max-width:490px; margin-bottom:34px;
+  }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:34px; }
+  .hero-meta{ display:flex; align-items:center; gap:14px; }
+  .avatars{ display:flex; }
+  .avatars span{
+    width:34px;height:34px;border-radius:50%;
+    border:2.5px solid #fff;
+    margin-left:-10px;
+    background:linear-gradient(135deg,var(--blue-pastel),var(--green-pastel));
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px; font-weight:700; color:var(--blue-dark);
+    box-shadow:var(--shadow-sm);
+  }
+  .avatars span:first-child{ margin-left:0; }
+  .hero-meta small{ color:var(--ink-soft); font-size:13.5px; font-weight:600; }
+  .hero-meta strong{ color:var(--ink); }
+
+  .hero-visual{ position:relative; height:460px; }
+  .laptop{
+    position:absolute; right:0; top:20px; width:88%;
+    filter:drop-shadow(0 30px 50px rgba(15,23,42,0.22));
+    animation:float 6s ease-in-out infinite;
+  }
+  @keyframes float{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-14px);} }
+  .float-card{
+    position:absolute;
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.6);
+    border-radius:var(--radius-sm);
+    box-shadow:var(--shadow-lg);
+    padding:14px 16px;
+    display:flex; align-items:center; gap:10px;
+    font-family:var(--font-display); font-weight:700; font-size:13px;
+  }
+  .fc1{ top:0; left:0; animation:float 5s ease-in-out infinite; animation-delay:.3s;}
+  .fc2{ bottom:30px; left:-20px; animation:float 5.5s ease-in-out infinite; animation-delay:.6s;}
+  .fc3{ bottom:60px; right:-10px; animation:float 6.5s ease-in-out infinite; animation-delay:.1s;}
+  .fc4{ top:-50px; right:-10px; animation:float 6.5s ease-in-out infinite; animation-delay:.9s;}
+  .fc-ic{ width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;flex-shrink:0;}
+
+  /* ---------- Trust bar ---------- */
+  .trust-bar{
+    padding:26px 0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:#fff;
+  }
+  .trust-row{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+  }
+  .trust-item{
+    display:flex; align-items:center; gap:10px;
+    font-family:var(--font-display); font-weight:700; font-size:14.5px; color:var(--ink-soft);
+  }
+  .trust-item .dot{
+    width:30px;height:30px;border-radius:50%;
+    background:var(--green-pastel); color:var(--green-dark);
+    display:flex;align-items:center;justify-content:center; flex-shrink:0;
+  }
+
+  /* ---------- Problem ---------- */
+  .problem{ background:var(--bg); }
+  .problem-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+  }
+  .problem-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:30px 26px; transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .problem-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); border-color:transparent; }
+  .problem-card .p-ic{
+    width:46px;height:46px;border-radius:12px;
+    background:#FFF1F1; color:#EF4444;
+    display:flex;align-items:center;justify-content:center; margin-bottom:18px;
+  }
+  .problem-card h4{ font-size:16.5px; margin-bottom:8px; }
+  .problem-card p{ font-size:14.5px; color:var(--ink-soft); }
+
+  /* ---------- Solution ---------- */
+  .solution{
+    background:linear-gradient(135deg,var(--green-pastel) 0%, var(--blue-pastel) 100%);
+    border-radius:var(--radius-lg);
+    max-width:1200px; margin:0 auto; padding:70px 60px;
+  }
+  .solution-grid{ display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; }
+  .solution h2{ font-size:clamp(26px,3.4vw,36px); margin-bottom:18px; }
+  .solution p{ color:var(--ink-soft); font-size:16px; margin-bottom:22px; }
+  .check-list li{
+    display:flex; gap:12px; align-items:flex-start;
+    font-weight:600; font-size:15px; margin-bottom:14px;
+  }
+  .check-list .ck{
+    width:24px;height:24px;border-radius:50%; background:var(--green); color:#fff;
+    display:flex;align-items:center;justify-content:center; flex-shrink:0; margin-top:1px;
+  }
+  .solution-visual{
+    background:#fff; border-radius:var(--radius-md); padding:32px;
+    box-shadow:var(--shadow-lg);
+  }
+  .before-after{ display:flex; flex-direction:column; gap:16px; }
+  .ba-row{ display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-radius:12px; }
+  .ba-row.before{ background:#FEF2F2; }
+  .ba-row.after{ background:var(--green-pastel); }
+  .ba-row .lab{ font-size:13px; font-weight:700; color:var(--ink-soft); }
+  .ba-row .val{ font-family:var(--font-display); font-weight:800; font-size:20px; }
+  .ba-row.before .val{ color:#EF4444; }
+  .ba-row.after .val{ color:var(--green-dark); }
+  .ba-arrow{ text-align:center; color:var(--ink-faint); font-size:13px; font-weight:700; }
+
+  /* ---------- Isi Paket ---------- */
+  .package-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+  }
+  .pkg-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:26px 22px; transition:transform .3s ease, box-shadow .3s ease;
+    position:relative; overflow:hidden;
+  }
+  .pkg-card::before{
+    content:""; position:absolute; top:0; left:0; width:100%; height:3px;
+    background:linear-gradient(90deg,var(--green),var(--blue));
+    transform:scaleX(0); transform-origin:left; transition:transform .35s ease;
+  }
+  .pkg-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); }
+  .pkg-card:hover::before{ transform:scaleX(1); }
+  .pkg-num{ font-family:var(--font-display); font-weight:800; font-size:12.5px; color:var(--ink-faint); letter-spacing:.05em; margin-bottom:14px; }
+  .pkg-ic{
+    width:48px;height:48px;border-radius:13px;
+    display:flex;align-items:center;justify-content:center; margin-bottom:16px; color:#fff;
+  }
+  .pkg-card h4{ font-size:16px; margin-bottom:6px; }
+  .pkg-card p{ font-size:13.5px; color:var(--ink-soft); }
+
+  /* ---------- Keunggulan ---------- */
+  .advantages{ background:var(--ink); color:#fff; border-radius:var(--radius-lg); max-width:1200px; margin:0 auto; padding:80px 50px; }
+  .advantages .section-head h2{ color:#fff; }
+  .advantages .section-head p{ color:#94A3B8; }
+  .adv-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,255,255,0.08); border-radius:var(--radius-md); overflow:hidden; }
+  .adv-item{
+    background:#101B31; padding:34px 26px; transition:background .3s ease;
+  }
+  .adv-item:hover{ background:#152140; }
+  .adv-ic{
+    width:42px;height:42px;border-radius:11px; margin-bottom:16px;
+    background:rgba(34,197,94,0.15); color:var(--green);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .adv-item h4{ color:#fff; font-size:15.5px; margin-bottom:6px; }
+  .adv-item p{ color:#94A3B8; font-size:13px; }
+
+  /* ---------- Jenjang ---------- */
+  .jenjang-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+  .jenjang-card{
+    border-radius:var(--radius-md); padding:36px 26px; text-align:center;
+    border:1px solid var(--line); background:#fff;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .jenjang-card:hover{ transform:translateY(-8px); box-shadow:var(--shadow-lg); }
+  .jenjang-emoji{
+    width:64px;height:64px;border-radius:50%; margin:0 auto 18px;
+    display:flex;align-items:center;justify-content:center; font-size:28px;
+  }
+  .jenjang-card h3{ font-size:20px; margin-bottom:6px; }
+  .jenjang-card p{ font-size:13.5px; color:var(--ink-soft); margin-bottom:22px; }
+  .jenjang-card .btn{ width:100%; }
+
+  /* ---------- Timeline ---------- */
+  .timeline{
+    display:grid; grid-template-columns:repeat(5,1fr); gap:0; position:relative;
+  }
+  .timeline::before{
+    content:""; position:absolute; top:26px; left:10%; right:10%; height:2px;
+    background:repeating-linear-gradient(90deg,var(--line) 0 8px, transparent 8px 16px);
+  }
+  .tl-step{ text-align:center; padding:0 12px; position:relative; }
+  .tl-num{
+    width:54px;height:54px;border-radius:50%; margin:0 auto 20px; position:relative; z-index:2;
+    background:linear-gradient(135deg,var(--green),var(--blue)); color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display); font-weight:800; font-size:19px;
+    box-shadow:0 10px 20px -6px rgba(37,99,235,0.4);
+  }
+  .tl-step h4{ font-size:15px; margin-bottom:6px; }
+  .tl-step p{ font-size:13px; color:var(--ink-soft); }
+
+  /* ---------- Testimoni ---------- */
+  .testi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .testi-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:28px 26px; transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .testi-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); }
+  .testi-stars{ color:var(--yellow-dark); font-size:14px; letter-spacing:2px; margin-bottom:14px; }
+  .testi-card p.quote{ font-size:14.5px; color:var(--ink-soft); margin-bottom:20px; min-height:80px; }
+  .testi-person{ display:flex; align-items:center; gap:12px; }
+  .testi-avatar{
+    width:42px;height:42px;border-radius:50%; flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display); font-weight:800; color:#fff; font-size:15px;
+  }
+  .testi-person strong{ font-size:14px; display:block; }
+  .testi-person span{ font-size:12.5px; color:var(--ink-faint); }
+
+  /* ---------- FAQ ---------- */
+  .faq-wrap{ max-width:800px; margin:0 auto; }
+  .faq-item{
+    border:1px solid var(--line); border-radius:16px; margin-bottom:14px; background:#fff; overflow:hidden;
+  }
+  .faq-q{
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+    padding:20px 24px; font-family:var(--font-display); font-weight:700; font-size:15.5px;
+  }
+  .faq-q .plus{
+    width:28px;height:28px;border-radius:50%; background:var(--green-pastel); color:var(--green-dark);
+    display:flex;align-items:center;justify-content:center; flex-shrink:0; transition:transform .3s ease, background .3s ease;
+    font-size:16px;
+  }
+  .faq-item.open .faq-q .plus{ transform:rotate(135deg); background:var(--green); color:#fff; }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .35s ease; }
+  .faq-a-inner{ padding:0 24px 22px; font-size:14.5px; color:var(--ink-soft); }
+
+  /* ---------- CTA Penutup ---------- */
+  .cta-final{
+    background:linear-gradient(135deg,var(--green-dark) 0%, var(--green) 55%, #17B85F 100%);
+    border-radius:var(--radius-lg); max-width:1200px; margin:0 auto;
+    padding:90px 40px; text-align:center; position:relative; overflow:hidden;
+  }
+  .cta-final::before, .cta-final::after{
+    content:""; position:absolute; border-radius:50%; background:rgba(255,255,255,0.08);
+  }
+  .cta-final::before{ width:340px;height:340px; top:-140px; left:-100px; }
+  .cta-final::after{ width:260px;height:260px; bottom:-120px; right:-60px; }
+  .cta-final .eyebrow{ background:rgba(255,255,255,0.15); color:#fff; border-color:rgba(255,255,255,0.25); }
+  .cta-final h2{ color:#fff; font-size:clamp(28px,4.4vw,44px); max-width:680px; margin:20px auto 16px; position:relative; }
+  .cta-final p{ color:rgba(255,255,255,0.85); max-width:520px; margin:0 auto 34px; position:relative; }
+  .cta-final .btn-yellow{ position:relative;padding:19px 44px; }
+  .cta-final .cta-sub{ margin-top:18px; font-size:13px; color:rgba(255,255,255,0.75); position:relative; }
+
+  /* ---------- Footer ---------- */
+  footer{ padding:60px 0 30px; }
+  .footer-grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:30px; padding-bottom:34px; border-bottom:1px solid var(--line); margin-bottom:24px; }
+  .footer-brand p{ color:var(--ink-soft); font-size:13.5px; max-width:280px; margin-top:12px; }
+  .footer-links{ display:flex; gap:60px; flex-wrap:wrap; }
+  .footer-col h5{ font-family:var(--font-display); font-size:13.5px; margin-bottom:14px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.04em; }
+  .footer-col a{ display:block; font-size:14px; color:var(--ink-soft); margin-bottom:10px; transition:color .2s ease; }
+  .footer-col a:hover{ color:var(--green-dark); }
+  .footer-bottom{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:13px; color:var(--ink-faint); }
+
+  /* ---------- Fade in ---------- */
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:1024px){
+    .problem-grid{ grid-template-columns:repeat(2,1fr); }
+    .package-grid{ grid-template-columns:repeat(3,1fr); }
+    .adv-grid{ grid-template-columns:repeat(2,1fr); }
+    .jenjang-grid{ grid-template-columns:repeat(2,1fr); }
+    .testi-grid{ grid-template-columns:repeat(2,1fr); }
+    .timeline{ grid-template-columns:repeat(5,1fr); }
+    .solution-grid{ grid-template-columns:1fr; }
+  }
+  @media (max-width:760px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-visual{ height:340px; order:1; }
+    .nav-links{ display:none; }
+    .burger{ display:flex; }
+    .nav-cta .btn-outline{ display:none; }
+    .hero{ padding:130px 0 60px; }
+    .hero-actions{ flex-direction:column; }
+    .hero-actions .btn{ width:100%; }
+    section{ padding:70px 0; }
+    .problem-grid{ grid-template-columns:1fr; }
+    .package-grid{ grid-template-columns:repeat(2,1fr); }
+    .adv-grid{ grid-template-columns:1fr; }
+    .jenjang-grid{ grid-template-columns:1fr; }
+    .testi-grid{ grid-template-columns:1fr; }
+    .timeline{ grid-template-columns:1fr; gap:30px; }
+    .timeline::before{ display:none; }
+    .solution{ padding:44px 26px; }
+    .advantages{ padding:50px 22px; }
+    .cta-final{ padding:60px 24px; }
+    .footer-grid{ flex-direction:column; }
+  }
+  @media (max-width:424px) {
+    .cta-final .btn-yellow{ position:relative;padding:17px 20px; }
+    .float-card{
+      padding: 10px 12px;
+      gap: 7px;
+    }
+  }
+  @media (max-width:370px) {
+    .cta-final .btn-yellow{ position:relative;padding:14px 15px;font-size: 15px; }
+    .fc1{ top:0; left:0; animation:float 5s ease-in-out infinite; animation-delay:.3s;}
+    .fc2{ bottom:-18px; left:-20px;}
+    .fc3{ bottom:50px; right:-10px;}
+    .fc4{ top:-50px; right:-10px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="container">
+    <nav>
+      <a href="#home" class="logo">
+        <span class="logo-mark">📘</span>
+        Admin<span style="color:var(--green-dark)">Guru</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#isi-paket">Isi Paket</a></li>
+        <li><a href="#keunggulan">Keunggulan</a></li>
+        <li><a href="#jenjang">Jenjang</a></li>
+        <li><a href="#testimoni">Testimoni</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-copy reveal in">
+        <span class="eyebrow">✦ Ajaran Baru 2026/2027</span>
+        <h1><span class="hl">Tidak Perlu</span> Lagi Membuat Administrasi Guru <span class="hl"><u>dari Nol.</u></span></h1>
+        <p>Modul Ajar, KSP, Prota, Prosem, Asesmen, SOP, Raport, Kalender Pendidikan, dan berbagai perangkat pembelajaran siap pakai — untuk guru TK/PAUD, SD, SMP, dan SMA.</p>
+        <div class="hero-actions">
+          <a href="#solution" class="btn btn-primary">Mulai Sekarang →</a>
+        </div>
+        <div class="hero-meta">
+          <div class="avatars">
+            <span>RA</span><span>SN</span><span>DP</span><span>+</span>
+          </div>
+          <small>Dipercaya <strong>500+ guru</strong> di seluruh Indonesia</small>
+        </div>
+      </div>
+      <div class="hero-visual reveal in">
+        <img src="./prev-main(dummy).png" class="laptop" style="width: 100%;" alt="">
+        <div class="float-card fc1">
+          <div class="fc-ic" style="background:var(--green);">📗</div> Modul Ajar TK
+        </div>
+        <div class="float-card fc2">
+          <div class="fc-ic" style="background:var(--blue);">📘</div> Modul Ajar SMP
+        </div>
+        <div class="float-card fc3">
+          <div class="fc-ic" style="background:var(--yellow-dark);">📙</div>Modul Ajar SMA
+        </div>
+        <div class="float-card fc4">
+          <div class="fc-ic" style="background:var(--yellow-dark);">📕</div>Modul Ajar SD
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-row">
+      <div class="trust-item"><span class="dot">✓</span> Siap Pakai</div>
+      <div class="trust-item"><span class="dot">✎</span> Mudah Diedit</div>
+      <div class="trust-item"><span class="dot">W</span> Format Word</div>
+      <div class="trust-item"><span class="dot">⟳</span> Update Kurikulum Terbaru</div>
+      <div class="trust-item"><span class="dot">🎓</span> Sesuai Jenjang</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Yang Sering Dirasakan Guru</span>
+      <h2>Administrasi Mengajar yang Menyita Waktu</h2>
+      <p>Sebelum mulai mengajar, ada banyak dokumen yang harus disiapkan dari nol — padahal waktu guru lebih berharga untuk mendampingi anak didik.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <div class="p-ic">⏱️</div>
+        <h4>Menyusun Modul Ajar Memakan Waktu</h4>
+        <p>Membuat modul dari nol bisa menghabiskan berjam-jam di setiap pertemuan.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="p-ic">📅</div>
+        <h4>Harus Membuat Prota & Prosem</h4>
+        <p>Menyusun program tahunan dan semester secara manual cukup melelahkan.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="p-ic">📝</div>
+        <h4>Menyiapkan Asesmen</h4>
+        <p>Menyusun instrumen asesmen awal yang sesuai capaian anak butuh waktu ekstra.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="p-ic">📋</div>
+        <h4>Membuat SOP</h4>
+        <p>Standar operasional prosedur sekolah harus disusun rapi dan konsisten.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="p-ic">🧾</div>
+        <h4>Menyusun Raport</h4>
+        <p>Format raport kurikulum merdeka perlu penyesuaian detail per anak.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="p-ic">🔄</div>
+        <h4>Menyesuaikan Perubahan Kurikulum</h4>
+        <p>Regulasi yang terus berubah membuat dokumen lama cepat usang.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="container">
+    <div class="solution reveal">
+      <div class="solution-grid">
+        <div>
+          <span class="eyebrow" style="background:#fff;">Solusinya</span>
+          <h2>Semua Sudah Disiapkan, Guru Tinggal Menyesuaikan</h2>
+          <p>Seluruh dokumen administrasi telah disusun mengikuti regulasi terbaru. Guru cukup mengedit bagian yang perlu — nama sekolah, nama anak, dan jadwal — lalu langsung siap digunakan.</p>
+          <ul class="check-list">
+            <li><span class="ck">✓</span> Buka file Word, ganti data sekolah</li>
+            <li><span class="ck">✓</span> Sesuaikan jadwal dan nama peserta didik</li>
+            <li><span class="ck">✓</span> Cetak atau kirim langsung ke orang tua</li>
+          </ul>
+        </div>
+        <div class="solution-visual">
+          <div class="before-after">
+            <div class="ba-row before">
+              <span class="lab">Cara lama</span>
+              <span class="val">± 20 jam</span>
+            </div>
+            <div class="ba-arrow">↓ dengan Paket Administrasi Guru Lengkap ↓</div>
+            <div class="ba-row after">
+              <span class="lab">Cara baru</span>
+              <span class="val">± 30 menit</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ISI PAKET -->
+<section id="isi-paket">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Isi Paket</span>
+      <h2>12 Dokumen Lengkap dalam Satu Paket</h2>
+      <p>Semua perangkat administrasi guru, siap unduh dan siap edit.</p>
+    </div>
+    <div class="package-grid">
+      <div class="pkg-card reveal"><div class="pkg-num">01</div><div class="pkg-ic" style="background:var(--green);">📄</div><h4>KSP</h4><p>Kurikulum Satuan Pendidikan lengkap dan siap pakai.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-num">02</div><div class="pkg-ic" style="background:var(--blue);">🗓️</div><h4>PROTA</h4><p>Program tahunan tersusun rapi per semester.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-num">03</div><div class="pkg-ic" style="background:var(--yellow-dark);">📆</div><h4>Program Semester</h4><p>Rincian kegiatan pembelajaran tiap semester.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-num">04</div><div class="pkg-ic" style="background:var(--green);">🧩</div><h4>RPPM</h4><p>Rencana pelaksanaan pembelajaran mingguan.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-num">05</div><div class="pkg-ic" style="background:var(--blue);">📘</div><h4>Modul Ajar Semester 1</h4><p>18 pertemuan siap pakai untuk semester ganjil.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-num">06</div><div class="pkg-ic" style="background:var(--yellow-dark);">📙</div><h4>Modul Ajar Semester 2</h4><p>18 pertemuan siap pakai untuk semester genap.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-num">07</div><div class="pkg-ic" style="background:var(--green);">🗂️</div><h4>Kalender Pendidikan</h4><p>Kaldik lengkap sesuai tahun ajaran berjalan.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-num">08</div><div class="pkg-ic" style="background:var(--blue);">⏰</div><h4>Jadwal Harian & Mingguan</h4><p>Template jadwal kegiatan yang mudah disesuaikan.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-num">09</div><div class="pkg-ic" style="background:var(--yellow-dark);">🔍</div><h4>Supervisi Kurikulum</h4><p>Instrumen supervisi kurikulum merdeka.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-num">10</div><div class="pkg-ic" style="background:var(--green);">📑</div><h4>SOP</h4><p>Standar operasional prosedur kegiatan sekolah.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-num">11</div><div class="pkg-ic" style="background:var(--blue);">🧠</div><h4>Asesmen Awal</h4><p>Instrumen asesmen awal capaian peserta didik.</p></div>
+      <div class="pkg-card reveal"><div class="pkg-num">12</div><div class="pkg-ic" style="background:var(--yellow-dark);">🏆</div><h4>Raport</h4><p>Template raport kelompok siap cetak.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- KEUNGGULAN -->
+<section id="keunggulan">
+  <div class="container">
+    <div class="advantages reveal">
+      <div class="section-head">
+        <span class="eyebrow" style="background:rgba(34,197,94,0.15); color:var(--green); border-color:rgba(34,197,94,0.3);">Keunggulan Produk</span>
+        <h2>Dibuat untuk Meringankan Kerja Guru</h2>
+        <p>Bukan sekadar template, tapi solusi administrasi yang benar-benar bisa dipakai.</p>
+      </div>
+      <div class="adv-grid">
+        <div class="adv-item"><div class="adv-ic">⚡</div><h4>Hemat Waktu</h4><p>Fokus mendidik, bukan mengetik dari nol.</p></div>
+        <div class="adv-item"><div class="adv-ic">✅</div><h4>Siap Pakai</h4><p>Langsung digunakan tanpa perlu menyusun ulang.</p></div>
+        <div class="adv-item"><div class="adv-ic">✏️</div><h4>Mudah Diedit</h4><p>Cukup ganti data sekolah dan peserta didik.</p></div>
+        <div class="adv-item"><div class="adv-ic">📄</div><h4>Format Word</h4><p>Kompatibel dengan Microsoft Word & Google Docs.</p></div>
+        <div class="adv-item"><div class="adv-ic">🖨️</div><h4>Bisa Dicetak</h4><p>Layout rapi, siap cetak untuk arsip sekolah.</p></div>
+        <div class="adv-item"><div class="adv-ic">📚</div><h4>Sesuai Regulasi Terbaru</h4><p>Disusun mengikuti kurikulum merdeka terkini.</p></div>
+        <div class="adv-item"><div class="adv-ic">💬</div><h4>Support Admin</h4><p>Bantuan langsung jika ada kendala penggunaan.</p></div>
+        <div class="adv-item"><div class="adv-ic">🔁</div><h4>Digunakan Berkali-kali</h4><p>Sekali beli, pakai untuk tahun ajaran berikutnya.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JENJANG -->
+<section id="jenjang">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Pilihan Jenjang</span>
+      <h2>Tersedia untuk Semua Jenjang</h2>
+      <p>Setiap paket disusun khusus mengikuti karakteristik dan kurikulum tiap jenjang.</p>
+    </div>
+    <div class="jenjang-grid">
+      <div class="jenjang-card reveal">
+        <div class="jenjang-emoji" style="background:var(--green-pastel);">🧸</div>
+        <h3>TK / PAUD</h3>
+        <p>Modul ajar, RPPM, asesmen, dan raport khusus PAUD.</p>
+        <a href="#cta-final" class="btn btn-outline">Lihat Paket</a>
+      </div>
+      <div class="jenjang-card reveal">
+        <div class="jenjang-emoji" style="background:var(--blue-pastel);">🎒</div>
+        <h3>SD</h3>
+        <p>Perangkat ajar lengkap untuk kelas 1–6.</p>
+        <a href="#cta-final" class="btn btn-outline">Lihat Paket</a>
+      </div>
+      <div class="jenjang-card reveal">
+        <div class="jenjang-emoji" style="background:#FFF6E0;">📐</div>
+        <h3>SMP</h3>
+        <p>Modul ajar per mata pelajaran, siap edit.</p>
+        <a href="#cta-final" class="btn btn-outline">Lihat Paket</a>
+      </div>
+      <div class="jenjang-card reveal">
+        <div class="jenjang-emoji" style="background:#F1E9FF;">🎓</div>
+        <h3>SMA</h3>
+        <p>Perangkat pembelajaran lengkap semua peminatan.</p>
+        <a href="#cta-final" class="btn btn-outline">Lihat Paket</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARA PEMESANAN -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Cara Pemesanan</span>
+      <h2>Hanya 5 Langkah Mudah</h2>
+      <p>Dari memilih jenjang sampai siap mengajar, prosesnya cepat dan sederhana.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-step reveal"><div class="tl-num">1</div><h4>Pilih Jenjang</h4><p>TK/PAUD, SD, SMP, atau SMA.</p></div>
+      <div class="tl-step reveal"><div class="tl-num">2</div><h4>Pesan</h4><p>Lakukan pemesanan sesuai paket pilihan.</p></div>
+      <div class="tl-step reveal"><div class="tl-num">3</div><h4>File Dikirim</h4><p>Terima seluruh file dalam format Word.</p></div>
+      <div class="tl-step reveal"><div class="tl-num">4</div><h4>Edit</h4><p>Sesuaikan data sekolah dan peserta didik.</p></div>
+      <div class="tl-step reveal"><div class="tl-num">5</div><h4>Gunakan</h4><p>Siap dipakai untuk tahun ajaran baru.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONI -->
+<section id="testimoni" style="background:var(--bg);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Testimoni</span>
+      <h2>Dipercaya Ribuan Guru di Indonesia</h2>
+      <p>Berikut pengalaman rekan-rekan guru yang sudah menggunakan paket ini.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">Sangat membantu, tinggal ganti nama sekolah dan siswa saja. Waktu saya jadi lebih banyak untuk anak-anak.</p>
+        <div class="testi-person">
+          <div class="testi-avatar" style="background:var(--green);">RA</div>
+          <div><strong>Ratna Ayu</strong><span>Guru TK, Bandung</span></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">Format Word-nya rapi dan mudah diedit. Raport kelompok jadi jauh lebih cepat selesai.</p>
+        <div class="testi-person">
+          <div class="testi-avatar" style="background:var(--blue);">SN</div>
+          <div><strong>Sri Nuraini</strong><span>Guru SD, Yogyakarta</span></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">Modul ajarnya lengkap 18 pertemuan per semester, sesuai kurikulum merdeka terbaru.</p>
+        <div class="testi-person">
+          <div class="testi-avatar" style="background:var(--yellow-dark);">DP</div>
+          <div><strong>Dian Permata</strong><span>Guru SMP, Surabaya</span></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">Sebelumnya saya butuh berhari-hari menyusun Prota dan Prosem. Sekarang cukup hitungan menit.</p>
+        <div class="testi-person">
+          <div class="testi-avatar" style="background:var(--green);">HW</div>
+          <div><strong>Heri Wibowo</strong><span>Guru SMA, Semarang</span></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">SOP dan instrumen supervisinya sangat membantu untuk persiapan akreditasi sekolah kami.</p>
+        <div class="testi-person">
+          <div class="testi-avatar" style="background:var(--blue);">NF</div>
+          <div><strong>Nur Fitriani</strong><span>Kepala TK, Malang</span></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">Paketnya lengkap banget, mulai dari asesmen awal sampai raport. Sangat worth it untuk guru baru seperti saya.</p>
+        <div class="testi-person">
+          <div class="testi-avatar" style="background:var(--yellow-dark);">AS</div>
+          <div><strong>Andi Saputra</strong><span>Guru SD, Makassar</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Pertanyaan yang Sering Ditanyakan</h2>
+      <p>Masih ada yang ingin ditanyakan? Berikut jawaban seputar paket ini.</p>
+    </div>
+    <div class="faq-wrap reveal">
+      <div class="faq-item">
+        <div class="faq-q"><span>Apakah file bisa diedit sesuai kebutuhan sekolah?</span><span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Bisa. Semua file dalam format Word (.docx) sehingga guru bebas mengedit nama sekolah, jadwal, nama peserta didik, dan bagian lain sesuai kebutuhan.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Untuk jenjang apa saja paket ini tersedia?</span><span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Paket tersedia untuk jenjang TK/PAUD, SD, SMP, dan SMA, masing-masing disusun mengikuti karakteristik dan kurikulum jenjangnya.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Bagaimana cara menerima file setelah membeli?</span><span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Setelah pemesanan dikonfirmasi, seluruh file akan dikirimkan langsung dan dapat langsung diunduh dan digunakan.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Apakah paket ini sesuai dengan Kurikulum Merdeka terbaru?</span><span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Ya, seluruh dokumen disusun dan diperbarui mengikuti regulasi dan Kurikulum Merdeka terbaru.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Apakah bisa digunakan untuk tahun ajaran berikutnya?</span><span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Bisa. File dapat digunakan berulang kali dan disesuaikan kembali setiap tahun ajaran baru.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Apakah ada bantuan jika mengalami kendala?</span><span class="plus">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Tersedia support admin yang siap membantu jika ada pertanyaan atau kendala dalam penggunaan file.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA PENUTUP -->
+<section id="cta-final">
+  <div class="container">
+    <div class="cta-final reveal">
+      <span class="eyebrow">Ajaran Baru 2026/2027</span>
+      <h2>Siapkan Administrasi Mengajar Lebih Cepat dan Praktis</h2>
+      <p>Satu paket lengkap, siap pakai, dan mudah diedit — hemat waktu Anda untuk lebih fokus mendampingi anak didik.</p>
+      <a href="https://api.whatsapp.com/send/?phone=6288210352982&text=Halo+Saya+ingin+memesan+Modul+ajar+Anda&app_absent=0" class="btn btn-yellow">Dapatkan Paket Sekarang</a>
+      <div class="cta-sub">Lengkap, praktis, siap pakai — tanpa ribet.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-mark">📘</span>Admin<span style="color:var(--green-dark)">Guru</span></div>
+        <p>Solusi lengkap administrasi guru untuk semua jenjang, siap pakai dan mudah diedit.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Produk</h5>
+          <a href="#isi-paket">Isi Paket</a>
+          <a href="#keunggulan">Keunggulan</a>
+          <a href="#jenjang">Jenjang</a>
+        </div>
+        <div class="footer-col">
+          <h5>Bantuan</h5>
+          <a href="#faq">FAQ</a>
+          <a href="#testimoni">Testimoni</a>
+          <a href="#cta-final">Pemesanan</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AdminGuru. Semua hak dilindungi.</span>
+      <span>Dibuat dengan ♥ untuk guru Indonesia</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => {
+        if(o !== item){
+          o.classList.remove('open');
+          o.querySelector('.faq-a').style.maxHeight = null;
+        }
+      });
+      if(isOpen){
+        item.classList.remove('open');
+        a.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // Mobile menu (simple toggle showing nav links as a dropdown)
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+    menuOpen = false;
+    navLinksEl.style.cssText = '';
+  }));
+</script>
+
+</body>
+</html>
